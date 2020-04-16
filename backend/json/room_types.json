@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "Nguyên căn",
+        "description": "Nguyên căn"
+    },
+    {
+        "id": 2,
+        "name": "Phòng riêng",
+        "description": "Phòng riêng"
+    },
+    {
+        "id": 3,
+        "name": "Ở ghép",
+        "description": "Ở ghép"
+    }
+]

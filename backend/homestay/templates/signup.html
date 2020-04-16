@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+
+{% block navbar %}{% endblock navbar %}
+{% block content %}
+    <div class="container">
+        
+        <hr>
+
+        <div class="card bg-light">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                <h4 class="card-title mt-3 text-center">Đăng kí thành viên</h4>
+                <p class="text-center">Bắt đầu với tài khoản miễn phí của bạn ngay hôm nay!</p>
+                <p>
+                    <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Đăng nhập với twitter</a>
+                    <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Đăng nhập với facebook</a>
+                </p>
+                <p class="divider-text">
+                    <span class="bg-light">HOẶC</span>
+                </p>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        {% if form.first_name.errors %}
+                            {{form.first_name(placeholder='Tên', class='form-control is-invalid')}}
+                            <div class="invalid-feedback">
+                                {% for error in form.first_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.first_name(placeholder='Tên', class='form-control')}}
+                        {% endif %}                      
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        {% if form.last_name.errors %}
+                        {{form.last_name(placeholder='Họ và tên đệm', class='form-control is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.last_name(placeholder='Họ và tên đệm', class='form-control')}}
+                        {% endif %}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        {% if form.email.errors %}
+                        {{form.email(placeholder='Địa chỉ email', class='form-control is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.email(placeholder='Địa chỉ email', class='form-control')}}
+                        {% endif %}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                        </div>
+                        <select class="custom-select" style="max-width: 120px;">
+                            <option selected="">+971</option>
+                            <option value="1">+972</option>
+                            <option value="2">+198</option>
+                            <option value="3">+701</option>
+                        </select>
+                        {% if form.phone_number.errors %}
+                        {{form.phone_number(placeholder='Số điện thoại', class='form-control is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone_number.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.phone_number(placeholder='Số điện thoại', class='form-control')}}
+                        {% endif %}
+                    </div> <!-- form-group// -->
+                    
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        {% if form.password1.errors %}
+                        {{form.password1(placeholder='Mật khẩu', class='form-control is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.password1.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{form.password1(placeholder='Mật khẩu', class='form-control')}}
+                        {% endif %}
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        {% if form.password2.errors %}
+                            {{form.password2(placeholder='Xác nhận mật khẩu mới', class='form-control is-invalid')}}
+                            <div class="invalid-feedback">
+                                {% for error in form.password2.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{form.password2(placeholder='Xác nhận mật khẩu mới', class='form-control')}}
+                        {% endif %}
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        {{form.submit(class='btn btn-primary btn-block')}}
+                    </div> <!-- form-group// -->
+                    <p class="text-center">Đã có tài khoản? <a href="{{ url_for('signin') }}">Đăng nhập</a> </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
+
+    </div>
+    <!--container end.//-->
+
+    <br><br>
+    
+{% endblock content %}
+

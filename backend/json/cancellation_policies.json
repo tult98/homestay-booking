@@ -1,0 +1,10 @@
+[
+    {
+        "id": "Moderate",
+        "tip": "Hoàn lại 50% giá trị đơn đặt phòng khi khách hủy trước 7 ngày nhận phòng.<br/> Khách hàng không được hoàn tiền trong vòng 7 ngày trước ngày nhận phòng."
+    },
+    {
+        "id": "Flexible",
+        "tip": "Miễn phí hủy phòng khi hủy trước 5 ngày nhận phòng.<br/> Khách hàng không được hoàn tiền trong vòng 5 ngày trước ngày nhận phòng."
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "id": 2,
+        "name": "Futon"
+    },
+    {
+        "id": 4,
+        "name": "Couch"
+    },
+    {
+        "id": 5,
+        "name": "Real Bed"
+    },
+    {
+        "id": 6,
+        "name": "Sofa Bed"
+    },
+    {
+        "id": 7,
+        "name": "King size"
+    },
+    {
+        "id": 8,
+        "name": "Queen Size"
+    },
+    {
+        "id": 9,
+        "name": "Twins Bed"
+    },
+    {
+        "id": 10,
+        "name": "Bunk bed"
+    }
+]

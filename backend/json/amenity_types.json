@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Tiện ích gia đình",
+        "description": ""
+    },
+    {
+        "id": 2,
+        "name": "Tiện ích bếp",
+        "description": ""
+    },
+    {
+        "id": 3,
+        "name": "Tiện ích giải trí",
+        "description": ""
+    },
+    {
+        "id": 5,
+        "name": "Tiện ích phòng",
+        "description": ""
+    },
+    {
+        "id": 6,
+        "name": "Tiện ích ",
+        "description": ""
+    },
+    {
+        "id": 7,
+        "name": "Tiện ích nổi bật",
+        "description": "Tiện ích nổi bật"
+    }
+]

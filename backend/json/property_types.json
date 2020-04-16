@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Chung cư",
+        "description": "Căn hộ chung cư"
+    },
+    {
+        "id": 9,
+        "name": "Biệt Thự",
+        "description": "Villa"
+    },
+    {
+        "id": 28,
+        "name": "Căn hộ Studio",
+        "description": "Căn hộ loại nhỏ, không phân chia không gian, với diện tích tối đa chỉ khoảng 60 m2"
+    },
+    {
+        "id": 29,
+        "name": "Nhà riêng",
+        "description": "Nhà riêng"
+    },
+    {
+        "id": 31,
+        "name": "Căn hộ dịch vụ",
+        "description": "Căn hộ dịch vụ chính là mô hình thu nhỏ của khách sạn với đủ các tiện ích như giường, tủ lạnh, bàn ghế, ti vi, điều hoa, bình tắm nóng lạnh, bếp nấu ( phụ thuộc vào diện tích căn hộ)… cùng với một số trang thiết bị cơ bản khác. Ngay tại đây chúng ta cũng có thể được trải nghiệm các dịch vụ giặt là quần áo, dọn dẹp phòng và phục vụ ăn uống…"
+    },
+    {
+        "id": 32,
+        "name": "Khác",
+        "description": "khác"
+    }
+]

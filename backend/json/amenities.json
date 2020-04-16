@@ -1,0 +1,194 @@
+[
+    {
+        "id": 36,
+        "name": "Phù hợp với trẻ nhỏ",
+        "amenity_types_id": 1,
+        "description": ""
+    },
+    {
+        "id": 39,
+        "name": "Đệm bổ sung",
+        "amenity_types_id": 1,
+        "description": ""
+    },
+    {
+        "id": 41,
+        "name": "Không hút thuốc",
+        "amenity_types_id": 1,
+        "description": ""
+    },
+    {
+        "id": 6,
+        "name": "Bếp điện",
+        "amenity_types_id": 2,
+        "description": ""
+    },
+    {
+        "id": 7,
+        "name": "Lò vi sóng",
+        "amenity_types_id": 2,
+        "description": ""
+    },
+    {
+        "id": 8,
+        "name": "Tủ lạnh",
+        "amenity_types_id": 2,
+        "description": ""
+    },
+    {
+        "id": 49,
+        "name": "Bếp Ga",
+        "amenity_types_id": 2,
+        "description": ""
+    },
+    {
+        "id": 3,
+        "name": "Cho thú cưng",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 5,
+        "name": "BBQ",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 10,
+        "name": "Cảnh quan đẹp",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 12,
+        "name": "Hướng biển",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 13,
+        "name": "Gần sân golf",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 15,
+        "name": "Câu cá",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 48,
+        "name": "Bể Bơi",
+        "amenity_types_id": 3,
+        "description": ""
+    },
+    {
+        "id": 22,
+        "name": "Ban Công",
+        "amenity_types_id": 5,
+        "description": ""
+    },
+    {
+        "id": 17,
+        "name": "Wifi",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 27,
+        "name": "TV",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 37,
+        "name": "Điều hoà",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 38,
+        "name": "Máy giặt",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 42,
+        "name": "Dầu gội, dầu xả",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 44,
+        "name": "Giấy vệ sinh",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 45,
+        "name": "Giấy ăn",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 46,
+        "name": "Nước khoáng",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 53,
+        "name": "Khăn tắm",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 55,
+        "name": "Kem đánh răng",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 59,
+        "name": "Xà phòng tắm",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 62,
+        "name": "Thang máy",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 69,
+        "name": "Máy sấy",
+        "amenity_types_id": 6,
+        "description": ""
+    },
+    {
+        "id": 64,
+        "name": "Máy chiếu phim",
+        "amenity_types_id": 7,
+        "description": ""
+    },
+    {
+        "id": 65,
+        "name": "Ghế massage",
+        "amenity_types_id": 7,
+        "description": ""
+    },
+    {
+        "id": 66,
+        "name": "Smart tivi",
+        "amenity_types_id": 7,
+        "description": ""
+    },
+    {
+        "id": 67,
+        "name": "Tủ đựng rượu",
+        "amenity_types_id": 7,
+        "description": ""
+    }
+]

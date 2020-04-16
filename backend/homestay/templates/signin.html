@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block navbar %}{% endblock navbar %}
+{% block content %}
+<div class="container">
+
+    <hr>
+
+    <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px;">
+            <h4 class="card-title mt-3 text-center">Đăng nhập</h4>
+            <p class="text-center">Đăng nhập ngay để trải nghiệm dịch vụ ngay hôm nay</p>
+            <p>
+                <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Đăng nhập với twitter</a>
+                <a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Đăng nhập với
+                    facebook</a>
+            </p>
+            <p class="divider-text">
+                <span class="bg-light">HOẶC</span>
+            </p>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+ 
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                    </div>
+                    {% if form.email.errors %}
+                    {{form.email(placeholder='Địa chỉ email', class='form-control is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{form.email(placeholder='Địa chỉ email', class='form-control')}}
+                    {% endif %}
+                </div> <!-- form-group// -->
+
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                    </div>
+                    {% if form.password.errors %}
+                    {{form.password1(placeholder='Mật khẩu', class='form-control is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{form.password(placeholder='Mật khẩu', class='form-control')}}
+                    {% endif %}
+                </div> <!-- form-group// -->
+
+                <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+                <br>
+                <div class="form-group">
+                    {{form.submit(class='btn btn-primary btn-block')}}
+                </div> <!-- form-group// -->
+                <p class="text-center">Quên mật khẩu?<a href="#"> Nhấn vào đây</a></p>
+                <p class="text-center">Bạn chưa có tài khoản? <a href="{{ url_for('signup') }}">Đăng kí</a> </p>
+            </form>
+        </article>
+    </div> <!-- card.// -->
+
+</div>
+<!--container end.//-->
+
+<br><br>
+
+{% endblock content %}

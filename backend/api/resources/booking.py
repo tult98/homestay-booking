@@ -19,6 +19,7 @@ ns = api.namespace('api/booking', description="Operations related to booking")
 class BookingListAPI(Resource):
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.marshal_list_with(serializers.booking)
+    @jwt_required
     def get(self):
         """
         Return the list of booking\n
@@ -35,6 +36,7 @@ class BookingListAPI(Resource):
 class BookingUserListAPI(Resource):
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.marshal_list_with(serializers.booking)
+    @jwt_required
     def get(self, user_id):
         """
         Return the list of booking for individual user\n
@@ -56,6 +58,7 @@ class BookingUserListAPI(Resource):
 class BookingMemberListAPI(Resource):
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.marshal_list_with(serializers.booking)
+    @jwt_required
     def get(self, member_id):
         """
         Return the list of booking for individual member\n
@@ -79,6 +82,7 @@ class BookingAPI(Resource):
         "code": "The code of booking"
     }, security="Bearer Auth")
     @api.marshal_with(serializers.booking)
+    @jwt_required
     def get(self, code):
         """
         Return detail  of a booking \n
@@ -124,6 +128,7 @@ class BookingAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'},
              params={"code": "The code of booking"}, security="Bearer Auth")
+    @jwt_required
     def delete(self, code):
         """
         Delete a booking of a given code \n
@@ -164,7 +169,7 @@ class BookingCreateAPI(Resource):
         'accommodation_id': "The id of accommodation"
     })
     @api.expect(serializers.booking_create)
-    # @jwt_required
+    @jwt_required
     def post(self, accommodation_id):
         """
         Create a booking \n

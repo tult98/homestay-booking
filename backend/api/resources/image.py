@@ -14,7 +14,7 @@ ns = api.namespace('api/image', description="Operations related to image")
 class ImageAccommodationListAPI(Resource):
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'},
              params={'accommodation_id': 'The id of accommodation that we want to get images'})
-    # @jwt_required
+    @jwt_required
     def get(self, accommodation_id):
         """
         Return the list of image that accommodation have\n
@@ -98,7 +98,7 @@ class ImageAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'},
              params={'id': 'The id of image'})
-    # @jwt_required
+    @jwt_required
     def delete(self, image_id):
         """
         Delete a image with a given id\n

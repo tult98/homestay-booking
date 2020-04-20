@@ -53,7 +53,7 @@ class CommentAPI(Resource):
     params={
         "comment_id": "The id of comment"
     })
-    # @jwt_required
+    @jwt_required
     def put(self, comment_id):
         """
         Update content of comment for given comment_id
@@ -73,7 +73,7 @@ class CommentAPI(Resource):
                 return {"message": "Update comment success"}
     
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def delete(self, comment_id):
         role = get_jwt_claims()['role']
         current_id = get_jwt_identity()

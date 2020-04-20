@@ -15,7 +15,7 @@ ns = api.namespace("api/member_profile", description="Operations related to memb
 class MemberProfileListAPI(Resource):
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.marshal_list_with(serializers.member_profile, skip_none=True)
-    # @jwt_required
+    @jwt_required
     def get(self):
         """
         Return a list of user profile \n
@@ -46,7 +46,7 @@ class MemberProfileAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'},
              params={"member_id": "The member_id of account"}, security="Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def put(self, member_id):
         """
         Update a user profile \n

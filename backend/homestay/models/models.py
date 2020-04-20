@@ -48,11 +48,15 @@ class User(db.Model):
         db.session.commit()
     
 
+class UserSchema(ma.Schema):
+    class Meta:
+        model = User
+        fields = ("email", "created_at")
+
 # delete field email in UserProfile table
 class UserProfile(db.Model):
     user_id = db.Column(db.String(32), db.ForeignKey(
         'user.id'), primary_key=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
     last_name = db.Column(db.String(255), default=None)
     first_name = db.Column(db.String(255), default=None)
     phone_number = db.Column(db.String(255), default=None)
@@ -67,9 +71,8 @@ class UserProfile(db.Model):
                            default=datetime.utcnow)
     deleted_at = db.Column(db.DateTime)
 
-    def __init__(self, user_id, email, first_name, last_name, phone_number):
+    def __init__(self, user_id, first_name, last_name, phone_number):
         self.user_id = user_id
-        self.email = email
         self.first_name = first_name
         self.last_name = last_name
         self.phone_number = phone_number
@@ -184,7 +187,7 @@ class Accommodation(db.Model):
     description = db.Column(db.Text)
     special_notices = db.Column(db.Text)
     status = db.Column(db.SmallInteger, nullable=False)
-    standard_guess = db.Column(db.Integer, nullable=False)
+    # standard_guess = db.Column(db.Integer, nullable=True)
     max_guess = db.Column(db.Integer, nullable=False)
     num_bathrooms = db.Column(db.SmallInteger)
     num_bedrooms = db.Column(db.SmallInteger)
@@ -281,11 +284,7 @@ class Member(db.Model):
                            default=datetime.utcnow)
     deleted_at = db.Column(db.DateTime)
     
-    def __init__(self, _id, email, hash_password, role):
-        self.id = _id
-        self.email = email
-        self.hash_password = hash_password
-        self.role = role
+    
     
     @classmethod
     def find_by_email(cls, email):

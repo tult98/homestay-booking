@@ -2,10 +2,10 @@ import json
 from homestay.models.models import RoomType, BedType, Amenity_category, Amenity, Accommodation, Image, Price, PropertyType, \
     Member, AccommodationAmenity
 from homestay import db
-#pylint:disable=E1101
+
 
 def read_json(file_output_path):
-    with open('json/' + file_output_path, 'r',  encoding='utf8') as f:
+    with open('json/' + file_output_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     return data
 
@@ -46,7 +46,7 @@ def insert_amenities():
 def insert_member():
     data = read_json('member.json')
     for i in data:
-        member = Member(id=i['id'], email=i['username'], hash_password=i['hash_password'], roll=i['roll'])
+        member = Member(id=i['id'], email=i['username'], hash_password=i['hash_password'], role=i['role'])
         save_db(member)
 
 
@@ -99,7 +99,7 @@ def insert_room_amenities():
 def insert_price():
     data = read_json('prices.json')
     for i in data:
-        price = Price(accommodation_id=i['room_id'], additional_guess_fee=i['additional_guests_fee'], cleaning_fee=i['cleaning_fee'],
+        price = Price(id=i['room_id'], additional_guess_fee=i['additional_guests_fee'], cleaning_fee=i['cleaning_fee'],
                       security_fee=i['security_fee'], monthly_price=i['monthly_price'],
                       nightly_price=i['nightly_price'], weekend_price=i['weekend_price'],
                       cancelation_policy=i['cancellation_policy'], check_in=i['checkin_time'],

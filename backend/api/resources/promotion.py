@@ -18,7 +18,7 @@ class PromotionListAPI(Resource):
         "member_id": "specify id of a member"
     })
     @api.marshal_list_with(serializers.promotion)
-    # @jwt_required
+    @jwt_required
     def get(self, member_id):
         """
         Return the list of promotion belong to particular member\n
@@ -45,7 +45,7 @@ class PromotionCreateAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.expect(serializers.promotion)
-    # @jwt_required
+    @jwt_required
     def post(self):
         """
         Create a promotion\n
@@ -98,7 +98,7 @@ class PromotionAPI(Resource):
              params={
                  'code': 'Specify code associated with the promotion'
              }, security = "Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def put(self, code):
         """
         Update a promotion\n
@@ -129,7 +129,7 @@ class PromotionAPI(Resource):
              params={
                  'code': 'Specify code associated with the promotion'
     }, security="Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def delete(self, code):
         """
         Delete a promotion with a given code\n

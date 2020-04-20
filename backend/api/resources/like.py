@@ -19,7 +19,7 @@ class LikeListAPI(Resource):
         "user_id": "id of user like accommodation"
     })
     @api.marshal_list_with(serializers.like)
-    # @jwt_required
+    @jwt_required
     def get(self, user_id):
         """"
         Return the list of like a specify user create
@@ -48,7 +48,7 @@ class LikeCreateAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.expect(serializers.like)
-    # @jwt_required
+    @jwt_required
     def post(self):
         """
         Create a like 
@@ -68,7 +68,7 @@ class LikeAPI(Resource):
     parser.add_argument("like_id", type=int, required=True, help="This field cannot be blank")
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def delete(self, like_id):
         """
         Delete a like

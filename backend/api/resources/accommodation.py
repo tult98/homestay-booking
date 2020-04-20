@@ -25,6 +25,7 @@ class AccommodationCreateAPI(Resource):
     
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.expect(serializers.accommodation_create)
+    @jwt_required
     def post(self):
         """
         Create an accommodation 
@@ -51,6 +52,7 @@ class AccommodationListAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.marshal_list_with(serializers.accommodation)
+    @jwt_required
     def get(self):
         """
         Return the list of all accommodation have in database
@@ -70,6 +72,7 @@ class AccommodationMemberListAPI(Resource):
         "member_id": "The id of member"
     })
     @api.marshal_list_with(serializers.accommodation)
+    @jwt_required
     def get(self, member_id):
         """
         Return the list accommodation of a particular member
@@ -114,6 +117,7 @@ class AccommodationAPI(Resource):
              params={
         "accommodation_id": "The id of accommodation"
     })
+    @jwt_required
     def put(self, accommodation_id):
         """
         Update an accommodation
@@ -141,6 +145,7 @@ class AccommodationAPI(Resource):
              params={
         "accommodation_id": "The id of accommodation"
     })
+    @jwt_required
     def delete(self, accommodation_id):
         """
         Delete an accommodation

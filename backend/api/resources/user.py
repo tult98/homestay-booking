@@ -12,7 +12,6 @@ from flask_jwt_extended import (
     get_jwt_claims
 )
 from api import serializers
-from flask_cors import cross_origin
 
 ns = api.namespace('api/user', description="Operations related to user")
 
@@ -49,7 +48,7 @@ class UserRegisterAPI(Resource):
         _id = uuid.uuid4().hex
         hash_password = bcrypt.generate_password_hash(data['password1']).decode('utf-8')
         user = User(_id, data['email'], hash_password)
-        user_proflie = UserProfile(_id, data['email'], data['first_name'], data['last_name'], data['phone_number'])
+        user_proflie = UserProfile(_id, data['first_name'], data['last_name'], data['phone_number'])
         user.save_to_db()
         user_proflie.save_to_db()
         return  {
@@ -61,7 +60,7 @@ class UserRegisterAPI(Resource):
 class UserListAPI(Resource):
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
     @api.marshal_list_with(serializers.user)
-    # @jwt_required
+    @jwt_required
     def get(self):
         """
         Return a list of user \n
@@ -83,7 +82,6 @@ class UserLoginAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'})
     @api.expect(serializers.user_login)
-    @cross_origin(supports_credentials=True)
     def post(self):
         """
         Login for user and return access token, refresh token \n
@@ -103,10 +101,6 @@ class UserLoginAPI(Resource):
         return {
             "message": "Your email or your password didnt correct"
         }, 400
-    
-    # def options(self):
-    #     print("hello world")
-    #     return {'hello': 'world'}
 
 
 @ns.route('/<string:user_id>')
@@ -117,7 +111,7 @@ class UserAPI(Resource):
         "user_id": "The id of user account"
     }, security="Bearer Auth")
     @api.marshal_with(serializers.user)
-    # @jwt_required
+    @jwt_required
     def get(self, user_id):
         """
         Return detail of a user account \n
@@ -141,7 +135,7 @@ class UserAPI(Resource):
              params={
         "user_id": "The user id of user account"
     }, security="Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def delete(self, user_id):
         """
         Delete a user account of a given id \n

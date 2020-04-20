@@ -9,19 +9,20 @@ ns = api.namespace("api/user_profile", description="Operations related to user p
 
 @ns.route("/")
 class UserProfileListAPI(Resource):
-    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'})
-    @api.marshal_list_with(serializers.user_profile, skip_none=True)
+    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
+    @api.marshal_list_with(serializers.user_register, skip_none=True)
+    @jwt_required
     def get(self):
         """
         Return a list of user profile \n
         <h2> Implementation Notes:</h2>
         <p> Use this method to get the list of user profile\n
         """
-        # role = get_jwt_claims()['role']
-        # if role != 3:
-        #     return 
-        # else:
-        return UserProfile.get_all_profile()
+        role = get_jwt_claims()['role']
+        if role != 3:
+            return 
+        else:
+            return UserProfile.get_all_profile()
 
 
 @ns.route('/<string:user_id>')
@@ -46,7 +47,7 @@ class UserProfileAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'},
              params={"user_id": "The id of account"}, security="Bearer Auth")
-    # @jwt_required
+    @jwt_required
     def put(self, user_id):
         """
         Update a user profile \n

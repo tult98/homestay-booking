@@ -5,7 +5,10 @@ from flask_jwt_extended import (
     get_jwt_claims,
     get_jwt_identity
 )
-from homestay import api
+from homestay import (
+    api, 
+    pagination,
+)
 from api import serializers
 import uuid
 from flask import request
@@ -46,23 +49,49 @@ class AccommodationCreateAPI(Resource):
         accommodation.save_to_db()
         return {'message': "Create accmmodation success"}
 
+@ns.route('/search')
+class AccommodationSearchAPI(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument("property_type", type=str)
+    parser.add_argument("room_type", type=str)
+    parser.add_argument("bed_type", type=str)
+    parser.add_argument("max_guess", type=int)
+    parser.add_argument("num_bathrooms", type=int)
+    parser.add_argument("num_bedrooms", type=int)
+    parser.add_argument("num_beds", type=int)
+    # parser.add_argument("price", type=float)
+
+    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'})
+    @api.expect(serializers.accommodation_search)
+    # @api.marshal_list_with(serializers.accommodation)
+    def post(self): 
+        """
+        Filter for accommodations 
+        <h2>Implemention Note: </h2>
+        <p>Use this method to filter list of accommodations</p>
+        """
+        data = self.parser.parse_args()
+        return pagination.paginate(Accommodation.filter_accommodatons(data), serializers.accommodation)
+        # return Accommodation.filter_accommodatons(data)
 
 @ns.route('/')
 class AccommodationListAPI(Resource):
 
-    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth")
-    @api.marshal_list_with(serializers.accommodation)
-    @jwt_required
+    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}
+    # , security="Bearer Auth"
+    )
+    # @api.marshal_list_with(serializers.accommodation)
+    # @jwt_required
     def get(self):
         """
         Return the list of all accommodation have in database
         <h2>Implemention Note: </h2>
         <p>Use this method to get back the list of accommodation</p>
         """
-        role = get_jwt_claims()['role']
-        if role != 3:
-            api.abort(code=400, message="You dont have permisson")
-        return Accommodation.get_all_accommodation()
+        # role = get_jwt_claims()['role']
+        # if role != 3:
+        #     api.abort(code=400, message="You dont have permisson")
+        return pagination.paginate(Accommodation, serializers.accommodation)
 
 @ns.route('/member/<string:member_id>')
 class AccommodationMemberListAPI(Resource):

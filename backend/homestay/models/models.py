@@ -2,6 +2,7 @@ from datetime import datetime
 from homestay import db, ma
 import random
 import string
+from sqlalchemy import (and_, or_)
 
 #pylint:disable=E1101
 # addition field email on User table
@@ -165,6 +166,15 @@ class PropertyType(db.Model):
                            default=datetime.utcnow)
     deleted_at = db.Column(db.DateTime)
 
+class BedType(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    accommodations = db.relationship("Accommodation", backref="bed_type", lazy=True)
+    created_at = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, nullable=False,
+                           default=datetime.utcnow)
+    deleted_at = db.Column(db.DateTime)
 
 class Accommodation(db.Model):
     id = db.Column(db.String(32), primary_key=True)
@@ -205,6 +215,52 @@ class Accommodation(db.Model):
     @classmethod
     def get_all_accommodation(cls):
         return cls.query.all()
+
+    @classmethod
+    def filter_accommodatons(cls, data):
+
+        query = db.session.query(Accommodation).join(PropertyType).join(BedType).join(RoomType)
+
+        if data.property_type != None:
+            query = query.filter(PropertyType.name==data.property_type)
+        
+        if data.room_type != None: 
+            query = query.filter(RoomType.name==data.room_type)
+        
+        if data.bed_type != None:
+            query = query.filter(BedType.name==data.bed_type)
+        
+        if data.max_guess != None:
+            query = query.filter(Accommodation.max_guess==data.max_guess)
+        
+        if data.num_beds != None:
+            query = query.filter(Accommodation.num_beds==data.num_beds)
+        
+        if data.num_bathrooms != None:
+            query = query.filter(Accommodation.num_bathrooms==data.num_bathrooms)
+
+        if data.num_bedrooms != None:
+            query = query.filter(Accommodation.num_bedrooms==data.num_bedrooms)
+
+        return query
+        
+
+        # return db.session.query(
+        #     Accommodation
+        # ).join(BedType).join(RoomType).filter_by(data).all()
+            # return db.session.query(
+            #     Accommodation
+            # ).join(PropertyType).join(BedType).join(RoomType).filter(
+            #     and_(
+            #         Ac    = data.guest_number, 
+            #         Accommodation.num_beds == data.bed_number,
+            #         Accommodation.num_bathrooms == data.bathroom_number,
+            #         Accommodation.num_bedrooms == data.bedroom_number,
+            #         PropertyType.name == data.property_type,
+            #         RoomType.name == data.room_type,
+            #         BedType.name == data.bed_type
+            #     )
+            # ).all()
     
     @classmethod
     def find_by_id(cls, _id):
@@ -502,18 +558,6 @@ class AccommodationAmenity(db.Model):
         'accommodation.id'), primary_key=True)
     amenity_id = db.Column(db.Integer, db.ForeignKey(
         'amenity.id'), primary_key=True)
-
-
-class BedType(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    accommodations = db.relationship("Accommodation", backref="bed_type", lazy=True)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
-    deleted_at = db.Column(db.DateTime)
-
 
 class Price(db.Model):
     id = db.Column(db.Integer, primary_key=True)

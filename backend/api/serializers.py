@@ -113,27 +113,55 @@ like = api.model("Like", {
     "created_at": fields.DateTime(description="The time when this user like accommodation")
 })
 
+room_type = api.model("RoomType", {
+    "name": fields.String(required=True, description="Name of room type")
+})
+
+bed_type = api.model("RoomType", {
+    "name": fields.String(required=True, description="Name of bed type")
+})
+
+property_type = api.model("RoomType", {
+    "name": fields.String(required=True, description="Name of property type")
+})
+
 accommodation_create = api.model("Accommodation1", {
     "name": fields.String(required=True, description="name of accommodation"),
     "property_type_id": fields.Integer(required=True, desceiprion="type of  accommodation"),
     "room_type_id": fields.Integer(required=True, desceiption="room type of accommodation"),
+    "bed_type_id": fields.Integer(required=True, description="bed type of accmmodation"),
     "standard_guess": fields.Integer(required=True, description="standard number of guess"),
     "max_guess": fields.Integer(required=True, description="Maximum number of guess"),
     "status": fields.Integer(required=True, description="status of accmmodation", default="0"),
 })
 
+accommodation_search = api.model("Accommodation3", {
+    "property_type": fields.String(description="name of accommodation"),
+    "bed_type": fields.String(desceiprion="type of  accommodation"),
+    "room_type": fields.String(desceiption="room type of accommodation"),
+    "max_guess": fields.Integer(description="number of guest of accommodation"),
+    "num_beds": fields.Integer(description="number of bed of accommodation"),
+    "num_bedrooms": fields.Integer(description="number of bed room number of accommodation"),
+    "num_bathrooms": fields.Integer(description="number of bathroom of accommodation"),
+    # "price": fields.Float(description="Price of accommodation")
+})
+
 accommodation = api.model("Accommodation2", {
+    "id": fields.String(required=True, description="id of accommodation"),
     "name": fields.String(required=True, description="name of accommodation"),
     "member_id": fields.String(required=True, description="id of member who own this accommodation"),
-    "property_type_id": fields.Integer(required=True, desceiprion="type of  accommodation"),
-    "room_type_id": fields.Integer(required=True, desceiption="room type of accommodation"),
+    # "property_type_id": fields.Integer(required=True, desceiprion="type of  accommodation"),
+    'property_type': fields.Nested(property_type),
+    'room_type': fields.Nested(room_type),
+    'bed_type': fields.Nested(bed_type),
+    # "room_type_id": fields.Integer(required=True, desceiption="room type of accommodation"),
     "standard_guess": fields.Integer(required=True, description="standard number of guess"),
     "max_guess": fields.Integer(required=True, description="Maximum number of guess"),
-    "status": fields.Integer(required=True, description="status of accmmodation", default="0"),
+    "status": fields.String(required=True, description="status of accmmodation", default="Waiting"),
     "address": fields.String(description="address of accommodation"),
     "num_bathrooms": fields.Integer(description="Number of bathroom"),
     "num_beds": fields.Integer(description="Number of bed"),
-    "bed_type_id": fields.String(desceiption="type of bed in accommodation"),
+    # "bed_type_id": fields.String(desceiption="type of bed in accommodation"),
     "description": fields.String(description="description of accommodation"),
     "special_notices": fields.String(description="special_notices of accommodation"),
     "num_bedrooms": fields.Integer(description="Number of bedroom"),

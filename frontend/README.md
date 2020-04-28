@@ -7,9 +7,9 @@
 ### `npm run build`
 ### `npm run eject`
 		
-# Cần cài NodeJS trước khi sử dụng!
+## Cần cài NodeJS trước khi sử dụng!
 
-# Quy trình chạy cơ bản: 
+## Quy trình chạy cơ bản: 
 	
 ### npm install: cài đặt các gói cần thiết
 		

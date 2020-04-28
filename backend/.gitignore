@@ -129,5 +129,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-homestay-booking-web-venv/
+homestay2/
 # End of https://www.gitignore.io/api/python

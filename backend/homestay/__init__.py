@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 
 dotenv_path = join(dirname(__file__), '.env')
+print(dotenv_path)
 load_dotenv(dotenv_path, override=True)
 
 # applications 
@@ -32,6 +33,7 @@ secret_key = os.getenv('SECRET_KEY')
 DATABSE_URI = 'mysql://{user}:{password}@{server}/{database}'.format(
     user=username, password=password, server='127.0.0.1', database=database_name)
 
+print(DATABSE_URI)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABSE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -44,9 +46,6 @@ bcrypt = Bcrypt(app)
 from flask_rest_paginate import Pagination
 
 app.config['PAGINATE_PAGE_SIZE'] = 20
-# app.config['PAGINATE_PAGE_PARAM'] = "pagenumber"
-# app.config['PAGINATE_SIZE_PARAM'] = "pagesize"
-# app.config['PAGINATE_RESOURCE_LINKS_ENABLED'] = False
 pagination = Pagination(app, db)
 
 from homestay.models.models import RevokedTokenModel

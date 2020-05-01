@@ -12,9 +12,15 @@ ns = api.namespace('api/image', description="Operations related to image")
 
 @ns.route('/<string:accommodation_id>')
 class ImageAccommodationListAPI(Resource):
+
+    def __init__(self, accommodation_id):
+        self.accommodation_id = accommodation_id
+
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'},
-             params={'accommodation_id': 'The id of accommodation that we want to get images'})
-    @jwt_required
+             params={'accommodation_id': 'The id of accommodation that we want to get images'}
+            )
+    # @jwt_required
+    @api.marshal_list_with(serializers.image)
     def get(self, accommodation_id):
         """
         Return the list of image that accommodation have\n
@@ -27,11 +33,11 @@ class ImageAccommodationListAPI(Resource):
         accommodation = Accommodation.find_by_id(accommodation_id)
         if not accommodation:
             api.abort(code=404, message="Cannot find the accmmodation you need")
-        member_id = accommodation.member_id
-        current_id = get_jwt_identity()
-        role = get_jwt_claims()['role']
-        if not (role == 3 or current_id == member_id):
-            api.abort(code=400, message="You dont have permission")
+        # member_id = accommodation.member_id
+        # current_id = get_jwt_identity()
+        # role = get_jwt_claims()['role']
+        # if not (role == 3 or current_id == member_id):
+        #     api.abort(code=400, message="You dont have permission")
         images = accommodation.images
         if len(images) == 0:
             return {"message": "This accommodation doesnt have any image yet"}, 200

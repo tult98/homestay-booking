@@ -154,6 +154,7 @@ accommodation = api.model("Accommodation2", {
     'property_type': fields.Nested(property_type),
     'room_type': fields.Nested(room_type),
     'bed_type': fields.Nested(bed_type),
+    'images': fields.Nested(image, skip_none=True),
     # "room_type_id": fields.Integer(required=True, desceiption="room type of accommodation"),
     "standard_guess": fields.Integer(required=True, description="standard number of guess"),
     "max_guess": fields.Integer(required=True, description="Maximum number of guess"),

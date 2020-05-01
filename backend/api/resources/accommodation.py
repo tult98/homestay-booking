@@ -96,7 +96,8 @@ class AccommodationListAPI(Resource):
 @ns.route('/member/<string:member_id>')
 class AccommodationMemberListAPI(Resource):
 
-    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, security="Bearer Auth", 
+    @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'}, 
+    security="Bearer Auth", 
     params={
         "member_id": "The id of member"
     })

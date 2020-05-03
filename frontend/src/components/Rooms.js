@@ -1,152 +1,114 @@
-import React from 'react';
+import React, {Component} from 'react';
+import axios from 'axios';
+import { CardMedia } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-import Pagination from "react-js-pagination"
+import './Rooms.css'
+import Pagination from '@material-ui/lab/Pagination';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Homestay Booking Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    paddingTop: '56.25%', // 16:9
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-  textcenter: {
-    textAlign: "center",
-  },
-  pagination: {
-    display: "inline-block",
-    paddingLeft: 0,
-    margin: '20px',
-    borderRadius: '4px',
-
-  },
-}));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9,  10, 11];
-
-export default function Album() {
-  const classes = useStyles();
-
-  return (
-    <React.Fragment>
-      <CssBaseline />
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Tìm nhanh
-                  </Button>
-                  <Button variant="contained" color="primary">
-                    Tìm nhanh 2
-                  </Button>
-                  <Button variant="contained" color="primary">
-                    Tìm nhanh 3
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
-          </Container>
-        </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                    <CardContent className={classes.cardContent}>
-                        <Typography>
-                        Loại Homestay
-                        </Typography>
-                        <CardActions>
-                            <Button gutterBottom variant="h4" component="h2" size='Medium'>
-                                <b>
-                                    Tên homestay
-                                </b>
-                            </Button>
-                        </CardActions>
-                        <Typography>
-                            Kích thước: mấy người, mấy phòng...
-                        </Typography>
-                        <Typography>
-                            <b>
-                                Giá cả
-                            </b>
-                        </Typography>
-                        <Typography>
-                            Địa chỉ
-                        </Typography>
-                    </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-          <div className='textcenter'>
-            <Pagination className='pagination'
-            activePage={15}
-            itemsCountPerPagee={10}
-            totalItemsCount={20}
-            pageRangeDisplayed={5}
-            />
-          </div>
-          
-          
-        </Container>
+class Rooms extends Component {
+  state = {
+    posts: [ ],
+    pagis: 0,
+    page: 0
+  }
+  
+  componentDidMount(){
+    axios.get('http://localhost:5000/api/accommodation/')
+    .then(res => {
+      console.log(res)
+      this.setState({
+        posts: res.data.data,
+        pagis: res.data.pagination.pages
+      })
+    })
+  }
+  getNewPage = (numPage) => {
+    axios.get('/api/accommodation/?size=20&page='+ numPage)
+    .then(res => {
+      console.log(res)
+      this.setState({
+        posts: res.data.data 
         
-      </main>
-    </React.Fragment>
-  );
+      })
+    })
+  }
+  
+  // componentImage(id){
+  //   axios.get('http://localhost:5000/api/image/' + id)
+  //   .then(res => {
+  //     console.log(res)
+  //     this.setState({
+  //       images: res.data.data
+  //     })
+  //   })
+  // }
+  render() {
+    const { posts, pagis } = this.state;
+    if(posts.length)
+      return (
+        <div className="container">
+          <React.Fragment>
+              <CssBaseline />
+              <main>
+                <Container  maxWidth="md">
+                    <Grid container spacing={4}>
+                      {posts.map((post) => (
+                        <Grid className="cardGrid" item xs={6} sm={6} md={4}>
+                          <Card>
+                            <CardMedia
+                              className="cardMedia"
+                              image={post.images[0].image_url}
+                              />
+                              <CardContent className="room content">
+                                <Typography>
+                                  <b><i>Loại homestay: {post.property_type.name}</i></b>
+                                </Typography>
+                                <CardActions>
+                                    <Button gutterBottom variant="h1" component="h1" size='Medium' >
+                                        <b>
+                                          {post.name}
+                                        </b>
+                                    </Button>
+                                </CardActions>
+                                <ul>
+                                  <li>
+                                    <Typography>
+                                      Kích thước: {post.max_guess} người, {post.num_bathrooms} phòng tắm, {post.num_bedrooms} phòng ngủ
+                                    </Typography>
+                                  </li>
+                                  <li>
+                                    <Typography>
+                                        {post.address}
+                                    </Typography>
+                                  </li>
+                                </ul>
+                                
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                      ))}
+                    </Grid>
+                </Container>
+              </main>
+            </React.Fragment>
+          <div className='pagination'>
+            <Pagination count={pagis} onChange={this.getNewPage({page: this.state.page})}/>
+          </div>
+        </div>
+      )
+    else 
+      return(
+        <div className="center">No posts yet</div>
+      )
+  }
 }
+
+export default Rooms
+

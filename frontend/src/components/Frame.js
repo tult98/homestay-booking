@@ -125,9 +125,7 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  // const goToSignUp = () => {
-  //   browserHistory.push("/Signup")
-  // };
+  
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (

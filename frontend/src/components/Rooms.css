@@ -1,0 +1,16 @@
+.cardMedia {
+    width: 345px;
+    height: 145px;
+}
+
+.cardGrid {
+    display: flex; 
+    flex-direction: column;
+    width: 345px;
+    height: 375px;
+}
+
+.pagination {
+    align-items: center;
+    align-content: center;
+}

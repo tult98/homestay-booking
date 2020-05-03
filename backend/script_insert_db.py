@@ -4,6 +4,23 @@ from homestay.models.models import RoomType, BedType, Amenity_category, Amenity,
 from homestay import db
 
 
+def convert_time(time_string):
+    return datetime.strptime(time_string,'%H:%M %p')
+
+
+def filter_html(str):
+    lock = 0
+    str1 =""
+    for i in str:
+        if i == '<':
+            lock = 1
+        elif i == '>':
+            lock = 0
+        if lock == 0 and i != '>':
+            str1 += i
+    return str1
+
+
 def read_json(file_output_path):
     with open('json/' + file_output_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -74,7 +91,7 @@ def insert_room():
             bed_type = i['bed_type']
         rooms = Accommodation(id=i['id'], member_id=i['member_id'], property_type_id=property_type,
                               room_type_id=room_type, bed_type_id=bed_type, name=i['name'],
-                              address=i['address'], description=i['description'], special_notices=i['special_note'],
+                              address=i['address'], description=filter_html(i['description']), special_notices=filter_html(i['special_note']),
                               max_guess=i['maximum_guests'], num_bathrooms=i['num_bathrooms'],
                               num_bedrooms=i['num_bedrooms'], num_beds=i['num_beds'],
                               apartment_manual=i['apartment_manual'], apartment_rule=i['apartment_rules'],
@@ -102,6 +119,6 @@ def insert_price():
         price = Price(id=i['room_id'], additional_guess_fee=i['additional_guests_fee'], cleaning_fee=i['cleaning_fee'],
                       security_fee=i['security_fee'], monthly_price=i['monthly_price'],
                       nightly_price=i['nightly_price'], weekend_price=i['weekend_price'],
-                      cancelation_policy=i['cancellation_policy'], check_in=i['checkin_time'],
-                      check_out=i['checkout_time'])
+                      cancelation_policy=i['cancellation_policy'], check_in=conert_time(i['checkin_time']),
+                      check_out=convert_time(i['checkout_time']))
         save_db(price)

@@ -18,6 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from './ListPart';
 import Button from '@material-ui/core/Button';
 import Rooms from './Rooms'
+import './Frame.css';
 // import { browserHistory } from 'react-router';/
 
 function Copyright() {
@@ -144,10 +145,10 @@ export default function Dashboard() {
           </IconButton>
           <nav>
             <Button href="/Signup" color="primary" variant="outlined" className={classes.link} color='black'>
-                Signup
+                Đăng kí
             </Button>
             <Button href="#" color="primary" variant="outlined" className={classes.link} color='black'>
-                Login
+                Đăng nhập
             </Button>
           </nav>
           

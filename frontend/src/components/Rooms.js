@@ -20,44 +20,43 @@ class Rooms extends Component {
   }
   
   componentDidMount(){
-    axios.get('http://localhost:5000/api/accommodation/')
+    axios.get('http://localhost:5000/api/accommodation/?size=30&page=1')
     .then(res => {
       console.log(res)
       this.setState({
         posts: res.data.data,
-        pagis: res.data.pagination.pages
+        pagis: res.data.pagination.pages,
+        page: 1
       })
     })
   }
+
   getNewPage = (numPage) => {
-    axios.get('/api/accommodation/?size=20&page='+ numPage)
+    axios.get('http://localhost:5000/api/accommodation/?size=30&page='+ numPage)
     .then(res => {
       console.log(res)
       this.setState({
-        posts: res.data.data 
-        
+        posts: res.data.data,
       })
     })
   }
   
-  // componentImage(id){
-  //   axios.get('http://localhost:5000/api/image/' + id)
-  //   .then(res => {
-  //     console.log(res)
-  //     this.setState({
-  //       images: res.data.data
-  //     })
-  //   })
-  // }
+  handleChange = (event, value) => {
+    this.setState({
+      page: value
+    })
+    this.getNewPage(value)
+  };
+  
   render() {
-    const { posts, pagis } = this.state;
+    const { posts, pagis, page } = this.state;
     if(posts.length)
       return (
         <div className="container">
           <React.Fragment>
               <CssBaseline />
               <main>
-                <Container  maxWidth="md">
+                <Container  maxWidth="lg">
                     <Grid container spacing={4}>
                       {posts.map((post) => (
                         <Grid className="cardGrid" item xs={6} sm={6} md={4}>
@@ -77,7 +76,7 @@ class Rooms extends Component {
                                         </b>
                                     </Button>
                                 </CardActions>
-                                <ul>
+                                {/* <ul>
                                   <li>
                                     <Typography>
                                       Kích thước: {post.max_guess} người, {post.num_bathrooms} phòng tắm, {post.num_bedrooms} phòng ngủ
@@ -88,7 +87,7 @@ class Rooms extends Component {
                                         {post.address}
                                     </Typography>
                                   </li>
-                                </ul>
+                                </ul> */}
                                 
                             </CardContent>
                           </Card>
@@ -99,7 +98,7 @@ class Rooms extends Component {
               </main>
             </React.Fragment>
           <div className='pagination'>
-            <Pagination count={pagis} onChange={this.getNewPage({page: this.state.page})}/>
+            <Pagination count={pagis} page={page} defaultPage={this.state.page} onChange={this.handleChange}/>
           </div>
         </div>
       )

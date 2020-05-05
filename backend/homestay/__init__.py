@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os
 
 dotenv_path = join(dirname(__file__), '.env')
-print(dotenv_path)
 load_dotenv(dotenv_path, override=True)
 
 # applications 
@@ -13,6 +12,11 @@ from flask_jwt_extended import JWTManager
 from flask_marshmallow  import Marshmallow
 
 app = Flask(__name__)
+# setting for cors 
+from flask_cors import CORS
+
+CORS(app)
+
 ma = Marshmallow(app)
 app.debug = True
 app.config['JWT_SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -33,7 +37,6 @@ secret_key = os.getenv('SECRET_KEY')
 DATABSE_URI = 'mysql://{user}:{password}@{server}/{database}'.format(
     user=username, password=password, server='127.0.0.1', database=database_name)
 
-print(DATABSE_URI)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABSE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -45,7 +48,7 @@ bcrypt = Bcrypt(app)
 # setting for pagination 
 from flask_rest_paginate import Pagination
 
-app.config['PAGINATE_PAGE_SIZE'] = 20
+app.config['PAGINATE_PAGE_SIZE'] = 30
 pagination = Pagination(app, db)
 
 from homestay.models.models import RevokedTokenModel

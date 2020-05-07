@@ -22,7 +22,6 @@ class Rooms extends Component {
   componentDidMount(){
     axios.get('http://localhost:5000/api/accommodation/?size=30&page=1')
     .then(res => {
-      console.log(res)
       this.setState({
         posts: res.data.data,
         pagis: res.data.pagination.pages,
@@ -34,7 +33,6 @@ class Rooms extends Component {
   getNewPage = (numPage) => {
     axios.get('http://localhost:5000/api/accommodation/?size=30&page='+ numPage)
     .then(res => {
-      console.log(res)
       this.setState({
         posts: res.data.data,
       })
@@ -70,7 +68,7 @@ class Rooms extends Component {
                                   <b><i>Loại homestay: {post.property_type.name}</i></b>
                                 </Typography>
                                 <CardActions>
-                                    <Button gutterBottom variant="h1" component="h1" size='Medium' >
+                                    <Button gutterbottom variant="h1" component="h1" size='Medium' >
                                         <b>
                                           {post.name}
                                         </b>

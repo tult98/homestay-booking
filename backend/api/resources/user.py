@@ -1,5 +1,5 @@
 from homestay.models.models import (User, 
-                                    UserProfile
+                                    UserProfile, 
                                     )
 from flask_restplus import Resource, reqparse
 from homestay import bcrypt
@@ -12,6 +12,7 @@ from flask_jwt_extended import (
     get_jwt_claims
 )
 from api import serializers
+from flask import jsonify
 
 ns = api.namespace('api/user', description="Operations related to user")
 
@@ -52,7 +53,7 @@ class UserRegisterAPI(Resource):
         user.save_to_db()
         user_proflie.save_to_db()
         return  {
-            'message': 'create account for {} successfuly'.format(data['email'])
+            'message': 'create account successfuly'.format(data['email'])
         }, 201
 
 
@@ -82,6 +83,7 @@ class UserLoginAPI(Resource):
 
     @api.doc(responses={200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'})
     @api.expect(serializers.user_login)
+    # @api.marshal_with(serializers.user)
     def post(self):
         """
         Login for user and return access token, refresh token \n
@@ -94,8 +96,9 @@ class UserLoginAPI(Resource):
             access_token = create_access_token(user)
             refresh_token = create_refresh_token(user)
             return {
+                "user": user.serializer,
                 "message": "loggin success",
-                "access_token": access_token,
+                "jwt": access_token,
                 "refresh_token": refresh_token
             }, 200
         return {

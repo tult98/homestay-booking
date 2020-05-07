@@ -28,6 +28,20 @@ class User(db.Model):
         self.hash_password = hash_password
         self.role = role
 
+    def __str__(self): 
+        return str({
+            "email": self.email,
+            "role": self.role
+        })
+
+    @property
+    def serializer(self): 
+        return {
+            'id': self.id,
+            'email': self.email,
+            'role': self.role
+        }
+
     @classmethod
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()
@@ -52,7 +66,12 @@ class User(db.Model):
 class UserSchema(ma.Schema):
     class Meta:
         model = User
-        fields = ("email", "created_at")
+        fields = ("email", "role")
+
+    def __init__(self, email, role):
+        self.email = email
+        self.role = role
+
 
 # delete field email in UserProfile table
 class UserProfile(db.Model):
@@ -339,9 +358,13 @@ class Member(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
     deleted_at = db.Column(db.DateTime)
-    
-    
-    
+
+    def __init__(self, _id, email, hash_password, role=0):
+        self.email = email
+        self.hash_password = hash_password
+        self.role = role
+        self.id = _id
+
     @classmethod
     def find_by_email(cls, email):
         return cls.query.filter_by(email=email).first()

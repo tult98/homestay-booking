@@ -12,14 +12,19 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems, secondaryListItems } from './ListPart';
 import Button from '@material-ui/core/Button';
 import Rooms from './Rooms'
-import './Frame.css';
-// import { browserHistory } from 'react-router';/
+import './Home.css';
+// import { browserHistory } from 'react-router';
+
+// import for routing 
+import {
+  Link
+} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -144,11 +149,15 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <nav>
-            <Button href="/Signup" color="primary" variant="outlined" className={classes.link} color='black'>
-                Đăng kí
+            <Button color="primary" variant="outlined" className={classes.link} color='black'>
+                <Link to={"/register"}>
+                  Đăng ký
+                </Link>
             </Button>
-            <Button href="#" color="primary" variant="outlined" className={classes.link} color='black'>
-                Đăng nhập
+            <Button color="primary" variant="outlined" className={classes.link} color='black'>
+                <Link to={"/login"}>
+                  Đăng nhập
+                </Link>
             </Button>
           </nav>
           

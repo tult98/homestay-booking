@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import './Rooms.css'
 import Pagination from '@material-ui/lab/Pagination';
+import { Link } from 'react-router-dom';
 
 class Rooms extends Component {
   state = {
@@ -70,7 +71,11 @@ class Rooms extends Component {
                                 <CardActions>
                                     <Button gutterbottom variant="h1" component="h1" size='Medium' >
                                         <b>
-                                          {post.name}
+                                          <Link to={{
+                                            pathname: `/rooms/${post.id}`
+                                            }}>
+                                            {post.name}
+                                          </Link>
                                         </b>
                                     </Button>
                                 </CardActions>

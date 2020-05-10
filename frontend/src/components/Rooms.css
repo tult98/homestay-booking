@@ -1,16 +1,44 @@
 .cardMedia {
-    width: 345px;
-    height: 145px;
+  width: 345px;
+  height: 145px;
 }
 
 .cardGrid {
-    display: flex; 
-    flex-direction: column;
-    width: 345px;
-    height: 375px;
+  display: flex;
+  flex-direction: column;
+  width: 345px;
+  height: 375px;
 }
 
 .pagination {
-    align-items: center;
-    align-content: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  display: flex;
 }
+.container {
+  align-items: center;
+}
+
+.btnStyle {
+    border: 1px solid #e6e6e6;
+    color: #222;
+    background-color: #fff;
+    display: inline-block;
+    transition: all .3s;
+    text-align: center;
+    cursor: pointer;
+    font: 400 13.3333px Arial;
+    align-items: flex-start;
+    text-rendering: auto;
+    padding: .5em .8em;
+    font-size: .875rem;
+    font-weight: 600;
+    margin-right: .75rem;
+    border-radius: 5px;
+    height: 40px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-appearance: button;
+}
+
+.btnGroup {}

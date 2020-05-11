@@ -15,8 +15,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://facebook.com/">
-        SonTDc
+      <Link color="inherit" to="/">
+        Bài tập lớn Phát triển Web An toàn
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -133,7 +133,7 @@ class Home extends Component {
 
 export default withStyles(useStyles)(Home);
 
-{
+// {
   /* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -160,8 +160,8 @@ export default withStyles(useStyles)(Home);
           
         </Toolbar>
       </AppBar> */
-}
-{
+// }
+// {
   /* <Drawer
         variant="permanent"
         classes={{
@@ -180,4 +180,4 @@ export default withStyles(useStyles)(Home);
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer> */
-}
+// }

@@ -8,6 +8,7 @@
   flex-direction: column;
   width: 345px;
   height: 375px;
+  /* border: 1px solid #e99535; */
 }
 
 .pagination {
@@ -21,7 +22,7 @@
 }
 
 .btnStyle {
-    border: 1px solid #e6e6e6;
+    border: 1px solid #e99535;
     color: #222;
     background-color: #fff;
     display: inline-block;
@@ -41,4 +42,9 @@
     -webkit-appearance: button;
 }
 
-.btnGroup {}
+h2 {
+  font-size: 3em;
+}
+h3 {
+  font-size: 2.5em;
+}

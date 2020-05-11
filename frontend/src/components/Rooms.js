@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { CardMedia } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,13 +11,25 @@ import Container from "@material-ui/core/Container";
 import "./Rooms.css";
 import Pagination from "@material-ui/lab/Pagination";
 import { Link } from "react-router-dom";
+import { TextField } from "@material-ui/core";
 
 class Rooms extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeSearch = this.onChangeSearch.bind(this);
+  }
   state = {
     posts: [],
     pagis: 0,
     page: 0,
+    search: "",
   };
+
+  onChangeSearch(e) {
+    this.setState({
+      search: e.target.value,
+    });
+  }
 
   componentDidMount() {
     axios
@@ -29,6 +40,7 @@ class Rooms extends Component {
           pagis: res.data.pagination.pages,
           page: 1,
         });
+        console.log(res);
       });
   }
 
@@ -39,6 +51,7 @@ class Rooms extends Component {
         this.setState({
           posts: res.data.data,
         });
+        console.log(res);
       });
   };
 
@@ -49,6 +62,22 @@ class Rooms extends Component {
     this.getNewPage(value);
   };
 
+  handleChangeFilter = (value, arg1) => {
+    axios
+      .post("/accommodation/search", {
+        arg1: value,
+      })
+      .then(function (response) {
+        console.log(response);
+        this.setState({
+          posts: response.data.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   render() {
     const { posts, pagis, page } = this.state;
     if (posts.length)
@@ -57,14 +86,77 @@ class Rooms extends Component {
           <React.Fragment>
             {/* <CssBaseline /> */}
             <main>
+              <h3>
+                <b>Tìm kiếm theo tiêu chí</b>
+              </h3>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="searchBox"
+                label="Tìm kiếm "
+                type="text"
+                className="form-control"
+                onChange={this.onChangeSearch}
+                value={this.state.search}
+              />
               <div className="btnGroup">
                 {/* Button group filter */}
-                <button className="btnStyle">Loại homestay</button>
-                <button className="btnStyle">Loại chỗ ở</button>
-                <button className="btnStyle">Loại chỗ ở</button>
-                <button className="btnStyle">Loại chỗ ở</button>
-                <button className="btnStyle">Loại chỗ ở</button>
-                <button className="btnStyle">Loại chỗ ở</button>
+                <button
+                  className="btnStyle"
+                  onClick={this.handleChangeFilter(
+                    this.state.search,
+                    "property_type"
+                  )}
+                >
+                  Loại homestay
+                </button>
+                <button
+                  className="btnStyle"
+                  onClick={this.handleChangeFilter(
+                    this.state.search,
+                    "bed_type"
+                  )}
+                >
+                  Loại phòng ngủ
+                </button>
+                <button
+                  className="btnStyle"
+                  onClick={this.handleChangeFilter(
+                    this.state.search,
+                    "room_type"
+                  )}
+                >
+                  Loại phòng
+                </button>
+                <button
+                  className="btnStyle"
+                  onClick={this.handleChangeFilter(
+                    this.state.search,
+                    "num_beds"
+                  )}
+                >
+                  Số phòng ngủ
+                </button>
+                <button
+                  className="btnStyle"
+                  onClick={this.handleChangeFilter(
+                    this.state.search,
+                    "num_bedrooms"
+                  )}
+                >
+                  Số phòng giường
+                </button>
+                <button
+                  className="btnStyle"
+                  onClick={this.handleChangeFilter(
+                    this.state.search,
+                    "num_bathrooms"
+                  )}
+                >
+                  Số phòng tắm
+                </button>
               </div>
               <div>
                 <p>&emsp;</p>

@@ -6,7 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import Header from './Header';
+import Header from "./Header";
+import { Slide } from "react-slideshow-image";
 
 const useStyles = (theme) => ({
   sidebarAboutBox: {
@@ -43,6 +44,14 @@ class RoomDetail extends Component {
   render() {
     const { classes } = this.props;
     const { room } = this.state;
+    console.log(room);
+    const properties = {
+      duration: 5000,
+      transitionDuration: 500,
+      infinite: true,
+      indicators: true,
+      arrows: true,
+    };
     return (
       <React.Fragment>
         <CssBaseline />
@@ -50,17 +59,38 @@ class RoomDetail extends Component {
         <Container>
           <main>
             {/* noi dung post */}
-            {/* <MainFeaturedPost post={mainFeaturedPost} />
-            <Grid container spacing={4}>
-              {featuredPosts.map((post) => (
-                <FeaturedPost key={post.title} post={post} />
-              ))}
-            </Grid> */}
-            
+            {/* Insert slideshow */}
+            <Slide {...properties}>
+              <div className="each-slide">
+                <div style={{ backgroundImage: `url(${room.image[0]})` }}>
+                  {/* <span>Slide 1</span> */}
+                </div>
+              </div>
+              <div className="each-slide">
+                <div style={{ backgroundImage: `url(${room.image[1]})` }}>
+                  {/* <span>Slide 2</span> */}
+                </div>
+              </div>
+              <div className="each-slide">
+                <div style={{ backgroundImage: `url(${room.image[2]})` }}>
+                  {/* <span>Slide 3</span> */}
+                </div>
+              </div>
+              <div className="each-slide">
+                <div style={{ backgroundImage: `url(${room.image[3]})` }}>
+                  {/* <span>Slide 3</span> */}
+                </div>
+              </div>
+              <div className="each-slide">
+                <div style={{ backgroundImage: `url(${room.image[4]})` }}>
+                  {/* <span>Slide 3</span> */}
+                </div>
+              </div>
+            </Slide>
             <Grid container spacing={5} className={classes.mainGrid}>
               <Grid item xs={12} md={8}>
                 <h2>{room.name}</h2>
-                <p>{room.address}</p>
+                <h3>{room.address}</h3>
                 <p> dien tich</p>
                 <p> kich thuoc </p>
                 <p>{room.description}</p>
@@ -74,7 +104,8 @@ class RoomDetail extends Component {
               <Grid item xs={12} md={4}>
                 <Paper elevation={0} className={classes.sidebarAboutBox}>
                   <Typography variant="h6" gutterBottom>
-                    Khu vực hiển thị giá tiền và nút đặt phòng
+                    <h2>Giá tiền</h2>
+                    <Button>Đặt ngay</Button>
                   </Typography>
                 </Paper>
               </Grid>

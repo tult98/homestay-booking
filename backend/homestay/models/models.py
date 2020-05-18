@@ -212,6 +212,7 @@ class Accommodation(db.Model):
     room_type_id = db.Column(db.Integer, db.ForeignKey('room_type.id'), nullable=False)
     bed_type_id = db.Column(db.Integer, db.ForeignKey('bed_type.id'))
     name = db.Column(db.String(255), nullable=False)
+    price = db.Column(db.Float, nullable=False)
     address = db.Column(db.String(255))
     description = db.Column(db.Text)
     special_notices = db.Column(db.Text)
@@ -243,6 +244,9 @@ class Accommodation(db.Model):
         if data.property_type != None:
             query = query.filter(PropertyType.name==data.property_type)
         
+        if data.price != None: 
+            query = query.filter(Accommodation.price==data.price)
+        
         if data.room_type != None: 
             query = query.filter(RoomType.name==data.room_type)
         
@@ -262,24 +266,6 @@ class Accommodation(db.Model):
             query = query.filter(Accommodation.num_bedrooms==data.num_bedrooms)
 
         return query
-        
-
-        # return db.session.query(
-        #     Accommodation
-        # ).join(BedType).join(RoomType).filter_by(data).all()
-            # return db.session.query(
-            #     Accommodation
-            # ).join(PropertyType).join(BedType).join(RoomType).filter(
-            #     and_(
-            #         Ac    = data.guest_number, 
-            #         Accommodation.num_beds == data.bed_number,
-            #         Accommodation.num_bathrooms == data.bathroom_number,
-            #         Accommodation.num_bedrooms == data.bedroom_number,
-            #         PropertyType.name == data.property_type,
-            #         RoomType.name == data.room_type,
-            #         BedType.name == data.bed_type
-            #     )
-            # ).all()
     
     @classmethod
     def find_by_id(cls, _id):
@@ -582,22 +568,22 @@ class AccommodationAmenity(db.Model):
     amenity_id = db.Column(db.Integer, db.ForeignKey(
         'amenity.id'), primary_key=True)
 
-class Price(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    additional_guess_fee = db.Column(db.Float, nullable=False, default=0)
-    cleaning_fee = db.Column(db.Float, nullable=False, default=0)
-    security_fee = db.Column(db.Float, nullable=False, default=0)
-    monthly_price = db.Column(db.Float, nullable=False)
-    nightly_price = db.Column(db.Float, nullable=False)
-    weekend_price = db.Column(db.Float, nullable=False)
-    cancelation_policy = db.Column(db.Text)
-    check_in = db.Column(db.DateTime, nullable=False)
-    check_out = db.Column(db.DateTime, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
-    deleted_at = db.Column(db.DateTime)
+# class Price(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     additional_guess_fee = db.Column(db.Float, nullable=False, default=0)
+#     cleaning_fee = db.Column(db.Float, nullable=False, default=0)
+#     security_fee = db.Column(db.Float, nullable=False, default=0)
+#     monthly_price = db.Column(db.Float, nullable=False)
+#     nightly_price = db.Column(db.Float, nullable=False)
+#     weekend_price = db.Column(db.Float, nullable=False)
+#     cancelation_policy = db.Column(db.Text)
+#     check_in = db.Column(db.DateTime, nullable=False)
+#     check_out = db.Column(db.DateTime, nullable=False)
+#     created_at = db.Column(db.DateTime, nullable=False,
+#                            default=datetime.utcnow)
+#     updated_at = db.Column(db.DateTime, nullable=False,
+#                            default=datetime.utcnow)
+#     deleted_at = db.Column(db.DateTime)
 
 
 class RevokedTokenModel(db.Model):

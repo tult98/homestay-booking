@@ -1,5 +1,5 @@
 import json
-from homestay.models.models import RoomType, BedType, Amenity_category, Amenity, Accommodation, Image, Price, PropertyType, \
+from homestay.models.models import RoomType, BedType, Amenity_category, Amenity, Accommodation, Image, PropertyType, \
     Member, AccommodationAmenity
 from homestay import db
 

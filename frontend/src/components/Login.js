@@ -91,7 +91,6 @@ class Login extends Component {
       AuthService.login(this.state.email, this.state.password).then(
         (res) => {
           if (res.jwt) {
-            alert("Đăng nhập thành công!!");
             this.props.history.push("/");
             window.location.reload();
           }

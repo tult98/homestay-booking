@@ -43,8 +43,6 @@ class RoomDetail extends Component {
   render() {
     const { classes } = this.props;
     const { room } = this.state;
-    console.log("This is data of room");
-    console.log(room);
     return (
       <React.Fragment>
         <CssBaseline />

@@ -7,6 +7,8 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Header from "./Header";
+
+import Button from "@material-ui/core/Button";
 import { Slide } from "react-slideshow-image";
 
 const useStyles = (theme) => ({
@@ -20,12 +22,24 @@ const useStyles = (theme) => ({
   mainGrid: {
     marginTop: theme.spacing(3),
   },
+  properties: {
+    duration: 5000,
+    transitionDuration: 500,
+    infinite: true,
+    indicators: true,
+    arrows: true,
+  },
+  eachslide: {
+    height: 700,
+    
+  },
 });
 
 class RoomDetail extends Component {
   state = {
     room: {},
     roomId: this.props.match.params.roomId,
+    images: [],
   };
 
   componentDidMount() {
@@ -34,6 +48,7 @@ class RoomDetail extends Component {
       .then((response) => {
         this.setState({
           room: response.data,
+          images: response.data.images,
         });
       })
       .catch((error) => {
@@ -43,15 +58,9 @@ class RoomDetail extends Component {
 
   render() {
     const { classes } = this.props;
-    const { room } = this.state;
-    console.log(room);
-    const properties = {
-      duration: 5000,
-      transitionDuration: 500,
-      infinite: true,
-      indicators: true,
-      arrows: true,
-    };
+    const { room, images } = this.state;
+    // console.log(images.map((image) => image.image_url));
+    const imageArr = images.map((image) => image.image_url);
     return (
       <React.Fragment>
         <CssBaseline />
@@ -60,32 +69,31 @@ class RoomDetail extends Component {
           <main>
             {/* noi dung post */}
             {/* Insert slideshow */}
-            <Slide {...properties}>
-              <div className="each-slide">
-                <div style={{ backgroundImage: `url(${room.image[0]})` }}>
-                  {/* <span>Slide 1</span> */}
-                </div>
-              </div>
-              <div className="each-slide">
-                <div style={{ backgroundImage: `url(${room.image[1]})` }}>
-                  {/* <span>Slide 2</span> */}
-                </div>
-              </div>
-              <div className="each-slide">
-                <div style={{ backgroundImage: `url(${room.image[2]})` }}>
-                  {/* <span>Slide 3</span> */}
-                </div>
-              </div>
-              <div className="each-slide">
-                <div style={{ backgroundImage: `url(${room.image[3]})` }}>
-                  {/* <span>Slide 3</span> */}
-                </div>
-              </div>
-              <div className="each-slide">
-                <div style={{ backgroundImage: `url(${room.image[4]})` }}>
-                  {/* <span>Slide 3</span> */}
-                </div>
-              </div>
+            <Slide className={classes.properties}>
+              <div
+                className={classes.eachslide}
+                style={{ backgroundImage: `url(${imageArr[1]})` }}
+              ></div>
+              <div
+                className={classes.eachslide}
+                style={{ backgroundImage: `url(${imageArr[2]})` }}
+              ></div>
+              <div
+                className={classes.eachslide}
+                style={{ backgroundImage: `url(${imageArr[3]})` }}
+              ></div>
+              <div
+                className={classes.eachslide}
+                style={{ backgroundImage: `url(${imageArr[4]})` }}
+              ></div>
+              <div
+                className={classes.eachslide}
+                style={{ backgroundImage: `url(${imageArr[5]})` }}
+              ></div>
+              <div
+                className={classes.eachslide}
+                style={{ backgroundImage: `url(${imageArr[6]})` }}
+              ></div>
             </Slide>
             <Grid container spacing={5} className={classes.mainGrid}>
               <Grid item xs={12} md={8}>
@@ -94,11 +102,10 @@ class RoomDetail extends Component {
                 <p> dien tich</p>
                 <p> kich thuoc </p>
                 <p>{room.description}</p>
-                <h3> Tien nghi cho o</h3>
+                <h3>Tiện nghi chỗ ở</h3>
                 <h4> tien ich</h4>
                 <h4>Tien ich bep</h4>
-                <h3> gia phong</h3>
-                <h3> danh gia</h3>
+                <h3>Đánh giá</h3>
               </Grid>
               <div className="sidebar"></div>
               <Grid item xs={12} md={4}>

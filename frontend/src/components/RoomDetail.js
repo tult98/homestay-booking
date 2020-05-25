@@ -99,11 +99,12 @@ class RoomDetail extends Component {
               <Grid item xs={12} md={8}>
                 <h2>{room.name}</h2>
                 <h3>{room.address}</h3>
-                <p> dien tich</p>
-                <p> kich thuoc </p>
-                <p>{room.description}</p>
+                <p><b>Số phòng ngủ: {room.num_bedrooms}</b></p>
+                <p><b>Số giường: {room.num_beds}</b></p>
+                <p><b>Số phòng tắm: {room.num_bathrooms}</b></p>
+                <code>{room.description}</code>
                 <h3>Tiện nghi chỗ ở</h3>
-                <h4> tien ich</h4>
+                <h4>Loại giường:</h4>
                 <h4>Tien ich bep</h4>
                 <h3>Đánh giá</h3>
               </Grid>

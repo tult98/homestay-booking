@@ -67,8 +67,36 @@ h3 {
 
 .btnFilter {
   margin-left:  20px;
+  border: 1px solid #f59595;
+  color: #222;
+  background-color: #fff;
+  /* position: relative; */
+  transition: all .3s;
+  text-align: center;
+  cursor: pointer;
+  font: 400 13.3333px Arial;
+  align-items: flex-start;
+  text-rendering: auto;
+  padding: .5em .8em;
+  font-size: .875rem;
+  font-weight: 600;
+  /* margin-right: .75rem; */
+  border-radius: 5px;
+  height: 30px;
+  width: 75px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-appearance: button;
+  display: block;
+  right: 0px;
+  padding: 10px;
+  text-decoration: none;
 }
 
 .chckBoxFilter {
   padding-bottom: 50px;
+}
+
+.blockBtnFilter {
+  margin-top: 10px;
+  display: flex;
 }

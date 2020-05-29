@@ -21,7 +21,11 @@ const itemsTypeHome = [
   "Căn hộ dịch vụ",
   "Khác",
 ];
-const itemsTypeBedroom = ["itemsTypeBedroom"];
+const itemsTypeBedroom = [
+  "itemsTypeBedroom",
+  "itemsTypeBedroom2",
+  "itemsTypeBedroom3",
+];
 const itemsTypeRoom = ["itemsTypeRoom"];
 const itemsNumBedrooms = ["itemsNumBedrooms"];
 const itemsNumBeds = ["itemsNumBeds"];
@@ -107,7 +111,7 @@ class Rooms extends Component {
   createCheckbox = (label) => (
     <b>
       <Checkbox
-      className="chckBoxFilter"
+        className="chckBoxFilter"
         label={label}
         handleCheckboxChange={this.toggleCheckbox}
         key={label}
@@ -238,19 +242,25 @@ class Rooms extends Component {
                 <button className="btnStyle" onClick={this.showTypeHouseIframe}>
                   Loại homestay
                 </button>
-                <button className="btnStyle" onClick={this.showTypeHouseIframe}>
+                <button
+                  className="btnStyle"
+                  onClick={this.showTypeBedRoomsIframe}
+                >
                   Loại phòng ngủ
                 </button>
-                <button className="btnStyle" onClick={this.showTypeHouseIframe}>
+                <button className="btnStyle" onClick={this.showTypeRoomIframe}>
                   Loại phòng
                 </button>
-                <button className="btnStyle" onClick={this.showTypeHouseIframe}>
+                <button
+                  className="btnStyle"
+                  onClick={this.showNumBedRoomsIframe}
+                >
                   Số phòng ngủ
                 </button>
-                <button className="btnStyle" onClick={this.showTypeHouseIframe}>
+                <button className="btnStyle" onClick={this.showNumBedsIframe}>
                   Số giường
                 </button>
-                <button className="btnStyle" onClick={this.showTypeHouseIframe}>
+                <button className="btnStyle" onClick={this.showBathRoomsIframe}>
                   Số phòng tắm
                 </button>
               </div>
@@ -258,70 +268,79 @@ class Rooms extends Component {
                 <Card id="typeHomeFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxes()}
-                    <button className="btnFilter" type="submit">
-                      Filter
-                    </button>
-                    <button className="btnFilter" type="submit">
-                      Cancel
-                    </button>
+                    <div className="blockBtnFilter">
+                      <button className="btnFilter" type="submit">
+                        Filter
+                      </button>
+                      <button className="btnFilter" type="submit">
+                        Cancel
+                      </button>
+                    </div>
                   </form>
                 </Card>
                 <Card id="typeBedRoomsFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxesBedRoom()}
-                    <button className="btnFilter" type="submit">
-                      Filter
-                    </button>
-                    <button className="btnFilter" type="submit">
-                      Cancel
-                    </button>
+                    <div className="blockBtnFilter">
+                      <button className="btnFilter" type="submit">
+                        Filter
+                      </button>
+                      <button className="btnFilter" type="submit">
+                        Cancel
+                      </button>
+                    </div>
                   </form>
                 </Card>
                 <Card id="typeRoomsFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxesTypeRoom()}
-                    <button className="btnFilter" type="submit">
-                      Filter
-                    </button>
-                    <button className="btnFilter" type="submit">
-                      Cancel
-                    </button>
+                    <div className="blockBtnFilter">
+                      <button className="btnFilter" type="submit">
+                        Filter
+                      </button>
+                      <button className="btnFilter" type="submit">
+                        Cancel
+                      </button>
+                    </div>
                   </form>
                 </Card>
                 <Card id="numBedRoomsFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxesNumBedrooms()}
-                    <button className="btnFilter" type="submit">
-                      Filter
-                    </button>
-                    <button className="btnFilter" type="submit">
-                      Cancel
-                    </button>
+                    <div className="blockBtnFilter">
+                      <button className="btnFilter" type="submit">
+                        Filter
+                      </button>
+                      <button className="btnFilter" type="submit">
+                        Cancel
+                      </button>
+                    </div>
                   </form>
                 </Card>
                 <Card id="numBedsFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxesNumBeds()}
-                    <button className="btnFilter" type="submit">
-                      Filter
-                    </button>
-                    <button className="btnFilter" type="submit">
-                      Cancel
-                    </button>
+                    <div className="blockBtnFilter">
+                      <button className="btnFilter" type="submit">
+                        Filter
+                      </button>
+                      <button className="btnFilter" type="submit">
+                        Cancel
+                      </button>
+                    </div>
                   </form>
                 </Card>
                 <Card id="numBathRooms" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
-                    <div >
-                      {this.createCheckboxesNumBaths()}
+                    <div>{this.createCheckboxesNumBaths()}</div>
+                    <div className="blockBtnFilter">
+                      <button className="btnFilter" type="submit">
+                        Filter
+                      </button>
+                      <button className="btnFilter" type="submit">
+                        Cancel
+                      </button>
                     </div>
-
-                    <button className="btnFilter" type="submit">
-                      Filter
-                    </button>
-                    <button className="btnFilter" type="submit">
-                      Cancel
-                    </button>
                   </form>
                 </Card>
               </div>

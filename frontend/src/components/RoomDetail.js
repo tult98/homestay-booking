@@ -8,6 +8,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Header from "./Header";
 import { Slide } from "react-slideshow-image";
+import { Button} from 'react-bootstrap';
+
 
 const useStyles = (theme) => ({
   sidebarAboutBox: {
@@ -60,7 +62,7 @@ class RoomDetail extends Component {
           <main>
             {/* noi dung post */}
             {/* Insert slideshow */}
-            <Slide {...properties}>
+            {/* <Slide {...properties}> */}
               <div className="each-slide">
                 <div style={{ backgroundImage: `url(${room.image[0]})` }}>
                   {/* <span>Slide 1</span> */}
@@ -86,7 +88,7 @@ class RoomDetail extends Component {
                   {/* <span>Slide 3</span> */}
                 </div>
               </div>
-            </Slide>
+            {/* </Slide> */}
             <Grid container spacing={5} className={classes.mainGrid}>
               <Grid item xs={12} md={8}>
                 <h2>{room.name}</h2>

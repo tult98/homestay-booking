@@ -198,6 +198,11 @@ class Rooms extends Component {
                                   {post.name}
                                 </Link>
                               </b>
+
+                              <b>
+                                  {post.price} VNĐ
+                              </b>
+
                             </Button>
                           </CardActions>
                           {/* <ul>

@@ -7,8 +7,10 @@ import AuthService from "../services/auth.service";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { TextField } from "@material-ui/core";
+import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import { TextField } from "@material-ui/core";
+
 
 const required = (value) => {
   if (!value) {
@@ -19,6 +21,7 @@ const required = (value) => {
     );
   }
 };
+
 
 const email = (value) => {
   if (!isEmail(value)) {

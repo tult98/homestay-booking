@@ -63,7 +63,7 @@ def insert_amenities():
 def insert_member():
     data = read_json('member.json')
     for i in data:
-        member = Member(id=i['id'], email=i['username'], hash_password=i['hash_password'], role=i['role'])
+        member = Member(_id=i['id'], email=i['username'], hash_password=i['hash_password'], role=i['role'])
         save_db(member)
 
 
@@ -91,8 +91,8 @@ def insert_room():
             bed_type = i['bed_type']
         rooms = Accommodation(id=i['id'], member_id=i['member_id'], property_type_id=property_type,
                               room_type_id=room_type, bed_type_id=bed_type, name=i['name'],
-                              address=i['address'], description=filter_html(i['description']), special_notices=filter_html(i['special_note']),
-                              max_guess=i['maximum_guests'], num_bathrooms=i['num_bathrooms'],
+                              address=i['address'], description=i['description'], special_notices=i['special_note'],
+                              price=i['price'], max_guess=i['maximum_guests'], num_bathrooms=i['num_bathrooms'],
                               num_bedrooms=i['num_bedrooms'], num_beds=i['num_beds'],
                               apartment_manual=i['apartment_manual'], apartment_rule=i['apartment_rules'],
                               status=i['status'], checkin_guide="")

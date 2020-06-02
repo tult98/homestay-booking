@@ -13,6 +13,7 @@ from flask_jwt_extended import (
 )
 from api import serializers
 from flask import jsonify
+import re 
 
 ns = api.namespace('api/user', description="Operations related to user")
 
@@ -91,19 +92,30 @@ class UserLoginAPI(Resource):
             <p>Use this method to login in account</p>
         """
         data = self.parser.parse_args()
-        user = User.find_by_email(data['email'])
-        if user and bcrypt.check_password_hash(user.hash_password, data['password']):
-            access_token = create_access_token(user)
-            refresh_token = create_refresh_token(user)
+        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        if (len(data['email']) and len(data['password']) >=8) and (len(data['email']) and len(data['password']) <=40): 
+            if not re.search(regex,data['email']):
+                return {
+                    "message": "Invalid Email"
+                }, 400
+            user = User.find_by_email(data['email'])
+            if user and bcrypt.check_password_hash(user.hash_password, data['password']):
+                access_token = create_access_token(user)
+                refresh_token = create_refresh_token(user)
+                return {
+                    "user": user.serializer,
+                    "message": "loggin success",
+                    "jwt": access_token,
+                    "refresh_token": refresh_token
+                }, 200
             return {
-                "user": user.serializer,
-                "message": "loggin success",
-                "jwt": access_token,
-                "refresh_token": refresh_token
-            }, 200
-        return {
-            "message": "Your email or your password didnt correct"
-        }, 400
+                "message": "Your email or your password didn't correct"
+            }, 400
+        
+        else:
+            return {
+                "message": "At least 8-40 characters"
+            }, 400
 
 
 @ns.route('/<string:user_id>')

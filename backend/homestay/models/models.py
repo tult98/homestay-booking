@@ -165,7 +165,7 @@ class Like(db.Model):
 class RoomType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     accommodations = db.relationship(
-        'Accommodation', backref='room_type', lazy=True)
+        'Accommodation', cascade="all, delete", backref='room_type', lazy=True)
     name = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
@@ -177,7 +177,7 @@ class RoomType(db.Model):
 class PropertyType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     accommodations = db.relationship(
-        'Accommodation', backref='property_type', lazy=True)
+        'Accommodation', cascade="all, delete", backref='property_type', lazy=True)
     name = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
@@ -188,7 +188,7 @@ class PropertyType(db.Model):
 class BedType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
-    accommodations = db.relationship("Accommodation", backref="bed_type", lazy=True)
+    accommodations = db.relationship("Accommodation", cascade="all, delete", backref="bed_type", lazy=True)
     created_at = db.Column(db.DateTime, nullable=False,
                            default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False,
@@ -216,8 +216,7 @@ class Accommodation(db.Model):
     address = db.Column(db.String(255))
     description = db.Column(db.Text)
     special_notices = db.Column(db.Text)
-    status = db.Column(db.SmallInteger, nullable=False)
-    # standard_guess = db.Column(db.Integer, nullable=True)
+    status = db.Column(db.String, nullable=False)
     max_guess = db.Column(db.Integer, nullable=False)
     num_bathrooms = db.Column(db.SmallInteger)
     num_bedrooms = db.Column(db.SmallInteger)
@@ -332,7 +331,7 @@ class ImageSchema(ma.Schema):
 class Member(db.Model):
     id = db.Column(db.String(32), primary_key=True)
     accommodations = db.relationship(
-        'Accommodation', backref='member', lazy=True)
+        'Accommodation', cascade="all, delete", backref='member', lazy=True)
     promotions = db.relationship('Promotion', backref='member', lazy=True)
     images = db.relationship('Image', backref='member', lazy=True)
     bookings = db.relationship('Booking', backref='member', lazy=True)

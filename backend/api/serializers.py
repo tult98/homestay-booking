@@ -162,6 +162,7 @@ accommodation = api.model("Accommodation2", {
     "address": fields.String(description="address of accommodation"),
     "num_bathrooms": fields.Integer(description="Number of bathroom"),
     "num_beds": fields.Integer(description="Number of bed"),
+    "price": fields.Float(description="Price of accommodation for 1 day"),
     # "bed_type_id": fields.String(desceiption="type of bed in accommodation"),
     "description": fields.String(description="description of accommodation"),
     "special_notices": fields.String(description="special_notices of accommodation"),

@@ -21,6 +21,7 @@ import { isEmail } from "validator";
 
 // import AuthService 
 import AuthService from "../services/auth.service";
+import { Input } from "@material-ui/core";
 
 // code for validate input 
 const required = value => {
@@ -202,7 +203,7 @@ class Register extends Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Đăng nhập
+            Đăng kí
           </Typography>
           <Form
             className={classes.form1}
@@ -214,7 +215,7 @@ class Register extends Component {
           >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <Input
                   autoComplete="email"
                   name="email"
                   variant="outlined"
@@ -231,7 +232,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <Input
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
@@ -248,7 +249,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <Input
                   variant="outlined"
                   required
                   fullWidth
@@ -264,7 +265,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <Input
                   variant="outlined"
                   required
                   fullWidth
@@ -279,7 +280,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <Input
                   variant="outlined"
                   required
                   fullWidth
@@ -295,7 +296,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <Input
                   variant="outlined"
                   required
                   fullWidth

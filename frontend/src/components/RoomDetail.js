@@ -59,7 +59,7 @@ class RoomDetail extends Component {
   render() {
     const { classes } = this.props;
     const { room, images } = this.state;
-    // console.log(images.map((image) => image.image_url));
+    console.log(room);
     const imageArr = images.map((image) => image.image_url);
     return (
       <React.Fragment>

@@ -157,7 +157,6 @@ class BookingAPI(Resource):
 @ns.route('/create/<string:accommodation_id>')
 class BookingCreateAPI(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('status', type=int, required=True)
     parser.add_argument('number_of_guess', type=int, required=True)
     parser.add_argument('number_of_night', type=int, required=True)
     parser.add_argument('total_price', type=float, required=True)
@@ -176,7 +175,7 @@ class BookingCreateAPI(Resource):
             <h2>Implementation Notes:</h2>
             <p>Use this method to create a new booking</p>
             <ul>
-                <li>Send a JSON object with the status, accommodation_id, number_of_guess, number_of_night, total_price in the request body</li>
+                <li>Send a JSON object with the accommodation_id, number_of_guess, number_of_night, total_price in the request body</li>
             </ul>
         """
         current_id = get_jwt_identity()
@@ -194,7 +193,7 @@ class BookingCreateAPI(Resource):
         # if no, creat the booking
         while Booking.find_by_code(code):
             code = Booking.code_generation()
-        booking = Booking(code=code, status=data['status'], number_of_guess=data['number_of_guess'],
+        booking = Booking(code=code, number_of_guess=data['number_of_guess'],
                           number_of_night=data['number_of_night'], total_price=data['total_price'], 
                           check_in=data['check_in'], check_out=data['check_out'],
                           member_id=member_id, user_id=current_id, accommodation_id=accommodation_id)

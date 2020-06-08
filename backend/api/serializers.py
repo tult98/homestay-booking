@@ -83,7 +83,6 @@ member_profile = api.model("MemberProfile", {
 })
 
 booking_create = api.model("Booking1", {
-    'status': fields.Integer(required=True, description="status of booking", default="0"),
     'number_of_guess': fields.Integer(required=True, description="The number of guess arrived"),
     'number_of_night': fields.Integer(required=True, description="The number of night guess will stay"),
     'total_price': fields.Float(required=True, description="Total price of booking"),

@@ -461,7 +461,7 @@ class Booking(db.Model):
     accommodation_id = db.Column(
         db.String(32), db.ForeignKey('accommodation.id'))
     code = db.Column(db.String(255), nullable=False)
-    status = db.Column(db.SmallInteger, nullable=False)
+    status = db.Column(db.SmallInteger, nullable=False, default=0)
     number_of_guess = db.Column(db.Integer, nullable=False)
     number_of_night = db.Column(db.Integer, nullable=False)
     total_price = db.Column(db.Float, nullable=False)

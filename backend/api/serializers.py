@@ -54,7 +54,7 @@ member_register = api.model("Member1", {
     'phone_number': fields.String(required=True, description="Phone number of member"),
     'password1': fields.String(required=True, description="The password for account"),
     "password2": fields.String(required=True, description="Confirm password"),
-    "role": fields.Integer(required=True, description="Role of member")
+    # "role": fields.Integer(required=True, description="Role of member")
 })
 
 member = api.model("Member2", {

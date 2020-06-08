@@ -22,33 +22,41 @@ const itemsTypeHome = [
   "Khác",
 ];
 const itemsTypeBedroom = [
-  "itemsTypeBedroom",
-  "itemsTypeBedroom2",
-  "itemsTypeBedroom3",
+  "Futon",
+  "Couch",
+  "Real Bed",
+  "Sofa Bed",
+  "King size",
+  "Queen Size",
+  "Twins Bed",
+  "Bunk bed",
 ];
-const itemsTypeRoom = ["itemsTypeRoom"];
-const itemsNumBedrooms = ["itemsNumBedrooms"];
-const itemsNumBeds = ["itemsNumBeds"];
-const itemsNumBaths = ["itemsNumBaths"];
+const itemsTypeRoom = ["Nguyên căn", "Phòng riêng", "Ở ghép"];
+
 class Rooms extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearch = this.onChangeSearch.bind(this);
+    this.selectedCheckBoxSet = new Set();
   }
+
   state = {
     posts: [],
     pagis: 0,
     page: 0,
     search: "",
-    isShow: 0,
+    isShowTypeHomestayFrame: 0,
+    isShowTypeBedFrame: 0,
+    isShowTypeRoomFrame: 0,
+    isShowNumBathRoomsFrame: 0,
+    isShowNumBedRoomsFrame: 0,
+    isShowNumBedsFrame: 0,
   };
-
   onChangeSearch(e) {
     this.setState({
       search: e.target.value,
     });
   }
-
   componentDidMount() {
     axios
       .get("http://192.168.1.209:5000/api/accommodation/?size=30&page=1")
@@ -61,7 +69,6 @@ class Rooms extends Component {
         console.log(res);
       });
   }
-
   getNewPage = (numPage) => {
     axios
       .get("http://192.168.1.209:5000/api/accommodation/?size=30&page=" + numPage)
@@ -72,18 +79,49 @@ class Rooms extends Component {
         console.log(res);
       });
   };
-
-  handleChange = (event, value) => {
-    this.setState({
-      page: value,
-    });
-    this.getNewPage(value);
-  };
-
-  handleChangeFilter = (value, arg1) => {
+  toggleCheckboxTypeHomestay = (label) => {
+    // Co du lieu label
+    // Tien hanh request theo label
     axios
       .post("/accommodation/search", {
-        arg1: value,
+        "property_type": { "name": label },
+      })
+      .then(function (response) {
+        console.log(response);
+        this.setState({
+          posts: response.data.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  toggleCheckboxTypeBed = (label) => {
+    // Co du lieu label
+    // Tien hanh request theo label
+    document.getElementById('typeHomestayCheckbox').setState(({isChecked}) => ({
+      isChecked: false,
+    }));
+    axios
+      .post("/accommodation/search", {
+        "bed_type": { "name": label },
+      })
+      .then(function (response) {
+        console.log(response);
+        this.setState({
+          posts: response.data.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  toggleCheckboxTypeRoom = (label) => {
+    // Co du lieu label
+    // Tien hanh request theo label
+    axios
+      .post("/accommodation/search", {
+        "room_type": { "name": label },
       })
       .then(function (response) {
         console.log(response);
@@ -96,136 +134,211 @@ class Rooms extends Component {
       });
   };
 
-  componentWillMount = () => {
-    this.selectedCheckboxes = new Set();
-  };
-
-  toggleCheckbox = (label) => {
-    if (this.selectedCheckboxes.has(label)) {
-      this.selectedCheckboxes.delete(label);
-    } else {
-      this.selectedCheckboxes.add(label);
-    }
-  };
-
-  createCheckbox = (label) => (
+  createCheckboxTypeHomestay = (label) => (
     <b>
       <Checkbox
         className="chckBoxFilter"
         label={label}
-        handleCheckboxChange={this.toggleCheckbox}
+        handleCheckboxChange={this.toggleCheckboxTypeHomestay}
+        key={label}
+        id='typeHomestayCheckbox'
+      />
+    </b>
+  );
+  createCheckboxTypeBed = (label) => (
+    <b>
+      <Checkbox
+        className="chckBoxFilter"
+        label={label}
+        handleCheckboxChange={this.toggleCheckboxTypeBed}
+        key={label}
+      />
+    </b>
+  );
+  createCheckboxTypeRoom = (label) => (
+    <b>
+      <Checkbox
+        className="chckBoxFilter"
+        label={label}
+        handleCheckboxChange={this.toggleCheckboxTypeRoom}
         key={label}
       />
     </b>
   );
 
   // Create CheckBox when click button
-  createCheckboxes = () => itemsTypeHome.map(this.createCheckbox);
-  createCheckboxesBedRoom = () => itemsTypeBedroom.map(this.createCheckbox);
-  createCheckboxesTypeRoom = () => itemsTypeRoom.map(this.createCheckbox);
-  createCheckboxesNumBedrooms = () => itemsNumBedrooms.map(this.createCheckbox);
-  createCheckboxesNumBeds = () => itemsNumBeds.map(this.createCheckbox);
-  createCheckboxesNumBaths = () => itemsNumBaths.map(this.createCheckbox);
+  createCheckboxes = () => itemsTypeHome.map(this.createCheckboxTypeHomestay);
+  createCheckboxesBedRoom = () =>
+    itemsTypeBedroom.map(this.createCheckboxTypeBed);
+  createCheckboxesTypeRoom = () =>
+    itemsTypeRoom.map(this.createCheckboxTypeRoom);
 
   //---------------------------------------
 
   // Show CheckBox tuong ung voi nut bam
-  showTypeHouseIframe = () => {
-    const { isShow } = this.state;
+  // Loại homestay
+  showTypeHomestayIframe = () => {
+    const { isShowTypeHomestayFrame } = this.state;
     try {
-      if (isShow === 1) {
-        document.getElementById("typeHomeFrame").style.display = "none";
-        this.setState({
-          isShow: 0,
-        });
-      } else {
+      if (isShowTypeHomestayFrame === 0) {
         document.getElementById("typeHomeFrame").style.display = "flex";
         this.setState({
-          isShow: 1,
+          isShowTypeHomestayFrame: 1,
+          isShowTypeBedFrame: 0,
+          isShowTypeRoomFrame: 0,
+          isShowNumBedRoomsFrame: 0,
+          isShowNumBedsFrame: 0,
+          isShowNumBathRoomsFrame: 0,
+        });
+        document.getElementById("typeBedFrame").style.display = "none";
+        document.getElementById("typeRoomsFrame").style.display = "none";
+        document.getElementById("numBedRoomsFrame").style.display = "none";
+        document.getElementById("numBedsFrame").style.display = "none";
+        document.getElementById("numBathRooms").style.display = "none";
+      } else {
+        document.getElementById("typeHomeFrame").style.display = "none";
+        this.setState({
+          isShowTypeHomestayFrame: 0,
         });
       }
     } catch {}
   };
-  showTypeBedRoomsIframe = () => {
-    const { isShow } = this.state;
+  // Loại giường ngủ
+  showTypeBedIframe = () => {
+    const { isShowTypeBedFrame } = this.state;
     try {
-      if (isShow === 1) {
-        document.getElementById("typeBedRoomsFrame").style.display = "none";
+      if (isShowTypeBedFrame === 0) {
+        document.getElementById("typeBedFrame").style.display = "flex";
+        document.getElementById("typeRoomsFrame").style.display = "none";
+        document.getElementById("numBedRoomsFrame").style.display = "none";
+        document.getElementById("numBedsFrame").style.display = "none";
+        document.getElementById("numBathRooms").style.display = "none";
+        document.getElementById("typeHomeFrame").style.display = "none";
         this.setState({
-          isShow: 0,
+          isShowTypeBedFrame: 1,
+          isShowTypeHomestayFrame: 0,
+          isShowTypeRoomFrame: 0,
+          isShowNumBedRoomsFrame: 0,
+          isShowNumBedsFrame: 0,
+          isShowNumBathRoomsFrame: 0,
         });
       } else {
-        document.getElementById("typeBedRoomsFrame").style.display = "flex";
+        document.getElementById("typeBedFrame").style.display = "none";
         this.setState({
-          isShow: 1,
+          isShowTypeBedFrame: 0,
         });
       }
     } catch {}
   };
+  // Loại phòng
   showTypeRoomIframe = () => {
-    const { isShow } = this.state;
+    const { isShowTypeRoomFrame } = this.state;
     try {
-      if (isShow === 1) {
+      if (isShowTypeRoomFrame === 0) {
+        document.getElementById("typeRoomsFrame").style.display = "flex";
+        document.getElementById("typeBedFrame").style.display = "none";
+        document.getElementById("numBedRoomsFrame").style.display = "none";
+        document.getElementById("numBedsFrame").style.display = "none";
+        document.getElementById("numBathRooms").style.display = "none";
+        document.getElementById("typeHomeFrame").style.display = "none";
+        this.setState({
+          isShowTypeRoomFrame: 1,
+          isShowTypeBedFrame: 0,
+          isShowTypeHomestayFrame: 0,
+          isShowNumBedRoomsFrame: 0,
+          isShowNumBedsFrame: 0,
+          isShowNumBathRoomsFrame: 0,
+        });
+      } else {
         document.getElementById("typeRoomsFrame").style.display = "none";
         this.setState({
-          isShow: 0,
-        });
-      } else {
-        document.getElementById("typeRoomsFrame").style.display = "flex";
-        this.setState({
-          isShow: 1,
+          isShowTypeRoomFrame: 0,
         });
       }
     } catch {}
   };
+  // Số phòng ngủ
   showNumBedRoomsIframe = () => {
-    const { isShow } = this.state;
+    const { isShowNumBedRoomsFrame } = this.state;
     try {
-      if (isShow === 1) {
+      if (isShowNumBedRoomsFrame === 0) {
+        document.getElementById("numBedRoomsFrame").style.display = "flex";
+        document.getElementById("typeRoomsFrame").style.display = "none";
+        document.getElementById("typeBedFrame").style.display = "none";
+        document.getElementById("numBedsFrame").style.display = "none";
+        document.getElementById("numBathRooms").style.display = "none";
+        document.getElementById("typeHomeFrame").style.display = "none";
+        this.setState({
+          isShowNumBedRoomsFrame: 1,
+          isShowTypeRoomFrame: 0,
+          isShowTypeBedFrame: 0,
+          isShowTypeHomestayFrame: 0,
+          isShowNumBedsFrame: 0,
+          isShowNumBathRoomsFrame: 0,
+        });
+      } else {
         document.getElementById("numBedRoomsFrame").style.display = "none";
         this.setState({
-          isShow: 0,
-        });
-      } else {
-        document.getElementById("numBedRoomsFrame").style.display = "flex";
-        this.setState({
-          isShow: 1,
+          isShowNumBedRoomsFrame: 0,
         });
       }
     } catch {}
   };
+  // Số giường
   showNumBedsIframe = () => {
-    const { isShow } = this.state;
+    const { isShowNumBedsFrame } = this.state;
     try {
-      if (isShow === 1) {
+      if (isShowNumBedsFrame === 0) {
+        document.getElementById("numBedsFrame").style.display = "flex";
+        document.getElementById("numBedRoomsFrame").style.display = "none";
+        document.getElementById("typeRoomsFrame").style.display = "none";
+        document.getElementById("typeBedFrame").style.display = "none";
+        document.getElementById("numBathRooms").style.display = "none";
+        document.getElementById("typeHomeFrame").style.display = "none";
+        this.setState({
+          isShowNumBedsFrame: 1,
+          isShowNumBedRoomsFrame: 0,
+          isShowTypeRoomFrame: 0,
+          isShowTypeBedFrame: 0,
+          isShowTypeHomestayFrame: 0,
+          isShowNumBathRoomsFrame: 0,
+        });
+      } else {
         document.getElementById("numBedsFrame").style.display = "none";
         this.setState({
-          isShow: 0,
-        });
-      } else {
-        document.getElementById("numBedsFrame").style.display = "flex";
-        this.setState({
-          isShow: 1,
+          isShowNumBedsFrame: 0,
         });
       }
     } catch {}
   };
+  // Số phòng tắm
   showBathRoomsIframe = () => {
-    const { isShow } = this.state;
+    const { isShowNumBathRoomsFrame } = this.state;
     try {
-      if (isShow === 1) {
+      if (isShowNumBathRoomsFrame === 0) {
+        document.getElementById("numBathRooms").style.display = "flex";
+        document.getElementById("numBedsFrame").style.display = "none";
+        document.getElementById("numBedRoomsFrame").style.display = "none";
+        document.getElementById("typeRoomsFrame").style.display = "none";
+        document.getElementById("typeBedFrame").style.display = "none";
+        document.getElementById("typeHomeFrame").style.display = "none";
+        this.setState({
+          isShowNumBathRoomsFrame: 1,
+          isShowNumBedsFrame: 0,
+          isShowNumBedRoomsFrame: 0,
+          isShowTypeRoomFrame: 0,
+          isShowTypeBedFrame: 0,
+          isShowTypeHomestayFrame: 0,
+        });
+      } else {
         document.getElementById("numBathRooms").style.display = "none";
         this.setState({
-          isShow: 0,
-        });
-      } else {
-        document.getElementById("numBathRooms").style.display = "flex";
-        this.setState({
-          isShow: 1,
+          isShowNumBathRoomsFrame: 0,
         });
       }
     } catch {}
   };
+
   render() {
     const { posts, pagis, page } = this.state;
     if (posts.length)
@@ -239,14 +352,14 @@ class Rooms extends Component {
               </h3>
               <div className="btnGroup">
                 {/* Button group filter */}
-                <button className="btnStyle" onClick={this.showTypeHouseIframe}>
-                  Loại homestay
-                </button>
                 <button
                   className="btnStyle"
-                  onClick={this.showTypeBedRoomsIframe}
+                  onClick={this.showTypeHomestayIframe}
                 >
-                  Loại phòng ngủ
+                  Loại homestay
+                </button>
+                <button className="btnStyle" onClick={this.showTypeBedIframe}>
+                  Loại giường ngủ
                 </button>
                 <button className="btnStyle" onClick={this.showTypeRoomIframe}>
                   Loại phòng
@@ -272,73 +385,58 @@ class Rooms extends Component {
                       <button className="btnFilter" type="submit">
                         Filter
                       </button>
-                      <button className="btnFilter" type="submit">
-                        Cancel
-                      </button>
                     </div>
                   </form>
                 </Card>
-                <Card id="typeBedRoomsFrame" className="checkBoxFrame">
+                <Card id="typeBedFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
                     {this.createCheckboxesBedRoom()}
                     <div className="blockBtnFilter">
                       <button className="btnFilter" type="submit">
                         Filter
                       </button>
-                      <button className="btnFilter" type="submit">
-                        Cancel
-                      </button>
                     </div>
                   </form>
                 </Card>
                 <Card id="typeRoomsFrame" className="checkBoxFrame">
-                  <form onSubmit={this.handleFormSubmit}>
+                  <form onSubmit={this.handleTypeRoomFormSubmit}>
                     {this.createCheckboxesTypeRoom()}
                     <div className="blockBtnFilter">
                       <button className="btnFilter" type="submit">
                         Filter
-                      </button>
-                      <button className="btnFilter" type="submit">
-                        Cancel
                       </button>
                     </div>
                   </form>
                 </Card>
                 <Card id="numBedRoomsFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
-                    {this.createCheckboxesNumBedrooms()}
+                    <b>Nhập số phòng ngủ: </b>
+                    <input type="text" className="inputNumBedRoom"></input>
                     <div className="blockBtnFilter">
                       <button className="btnFilter" type="submit">
                         Filter
-                      </button>
-                      <button className="btnFilter" type="submit">
-                        Cancel
                       </button>
                     </div>
                   </form>
                 </Card>
                 <Card id="numBedsFrame" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
-                    {this.createCheckboxesNumBeds()}
+                    <b>Nhập số giường: </b>
+                    <input type="text" className="inputNumBedRoom"></input>
                     <div className="blockBtnFilter">
                       <button className="btnFilter" type="submit">
                         Filter
-                      </button>
-                      <button className="btnFilter" type="submit">
-                        Cancel
                       </button>
                     </div>
                   </form>
                 </Card>
                 <Card id="numBathRooms" className="checkBoxFrame">
                   <form onSubmit={this.handleFormSubmit}>
-                    <div>{this.createCheckboxesNumBaths()}</div>
+                    <b>Nhập số phòng tắm: </b>
+                    <input type="text" className="inputNumBedRoom"></input>
                     <div className="blockBtnFilter">
                       <button className="btnFilter" type="submit">
                         Filter
-                      </button>
-                      <button className="btnFilter" type="submit">
-                        Cancel
                       </button>
                     </div>
                   </form>

@@ -104,7 +104,8 @@ class RoomDetail extends Component {
                 <p><b>Số phòng ngủ: {room.num_bedrooms}</b></p>
                 <p><b>Số giường: {room.num_beds}</b></p>
                 <p><b>Số phòng tắm: {room.num_bathrooms}</b></p>
-                <code>{room.description}</code>
+                <div dangerouslySetInnerHTML={{__html: room.description}}
+                />
                 <h3>Tiện nghi chỗ ở</h3>
                 <h4>Loại giường:</h4>
                 <h4>Tien ich bep</h4>
@@ -115,6 +116,7 @@ class RoomDetail extends Component {
                 <Paper elevation={0} className={classes.sidebarAboutBox}>
                   <Typography variant="h6" gutterBottom>
                     <h2>Giá tiền</h2>
+                    <p>{room.price}</p>
                     <Button>Đặt ngay</Button>
                   </Typography>
                 </Paper>

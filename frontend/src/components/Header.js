@@ -3,9 +3,31 @@ import axios from "axios";
 import "./Header.css";
 // import for routing
 import { Link } from "react-router-dom";
+import authService from "../services/auth.service";
 
 class Header extends Component {
+  state = {
+    currentUser: undefined
+  };
+
+  componentDidMount() {
+    const user = authService.getCurrentUser();
+
+    if(user) {
+      this.setState({
+        currentUser: user
+      });
+      console.log(user)
+    }
+  }
+
+  logOut() {
+    authService.logout();
+  }
+
   render() {
+    const {currentUser} = this.state;
+
     return (
       <div className="header">
         <div className="">
@@ -16,14 +38,26 @@ class Header extends Component {
           </h1>
         </div>
 
-        <div className="menu">
-          <Link className="login" to={"/login"}>
-            Đăng nhập
-          </Link>
-          <Link className="signup" to={"/register"}>
-            Đăng ký
-          </Link>
-        </div>
+        
+        {currentUser ? (
+          <div className="menu">
+            <div className="login">
+              {currentUser.user.email}
+            </div>
+            <a href="/login" className="login" onClick={this.logOut}>
+              LogOut
+            </a>
+          </div>
+            ) : (
+              <div className="menu">
+                <Link to={"/login"} className="login">
+                  Login
+                </Link>
+                <Link to={"/register"} className="signup">
+                  Sign Up
+                </Link>
+              </div>
+            )}
       </div>
     );
   }

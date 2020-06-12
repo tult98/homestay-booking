@@ -214,8 +214,8 @@ class Register extends Component {
             }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <Input
+              <Grid item xs={12}>
+                <TextField
                   autoComplete="email"
                   name="email"
                   variant="outlined"
@@ -232,7 +232,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Input
+                <TextField
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
@@ -249,7 +249,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -265,7 +265,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -280,7 +280,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -296,7 +296,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth

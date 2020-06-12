@@ -72,7 +72,6 @@ class AccommodationSearchAPI(Resource):
         """
         data = self.parser.parse_args()
         return pagination.paginate(Accommodation.filter_accommodatons(data), serializers.accommodation)
-        # return Accommodation.filter_accommodatons(data)
 
 @ns.route('/')
 class AccommodationListAPI(Resource):

@@ -57,7 +57,7 @@ h3 {
   display: none;
   border: 1px solid #e99535;
   width: 750px;
-  height: 200px;
+  /* height: 300px; */
 
 }
 
@@ -99,4 +99,8 @@ h3 {
 .blockBtnFilter {
   margin-top: 10px;
   display: flex;
+}
+
+.inputNumBedRoom {
+  
 }

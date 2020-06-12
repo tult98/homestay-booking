@@ -47,15 +47,21 @@ class UserRegisterAPI(Resource):
             return {
                 'message': "Your confirm password doesn't match"
             }, 400
-        _id = uuid.uuid4().hex
-        hash_password = bcrypt.generate_password_hash(data['password1']).decode('utf-8')
-        user = User(_id, data['email'], hash_password)
-        user_proflie = UserProfile(_id, data['first_name'], data['last_name'], data['phone_number'])
-        user.save_to_db()
-        user_proflie.save_to_db()
-        return  {
-            'message': 'create account successfuly'.format(data['email'])
-        }, 201
+        regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        if (len(data['email']) and len(data['password1']) >=8) and (len(data['email']) and len(data['password1']) <=40): 
+            if not re.search(regex,data['email']):
+                return {
+                    "message": "Invalid Email"
+                }, 400
+            _id = uuid.uuid4().hex
+            hash_password = bcrypt.generate_password_hash(data['password1']).decode('utf-8')
+            user = User(_id, data['email'], hash_password)
+            user_proflie = UserProfile(_id, data['first_name'], data['last_name'], data['phone_number'])
+            user.save_to_db()
+            user_proflie.save_to_db()
+            return  {
+                'message': 'create account successfuly'.format(data['email'])
+            }, 201
 
 
 @ns.route("/")

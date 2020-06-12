@@ -8,18 +8,6 @@ def convert_time(time_string):
     return datetime.strptime(time_string,'%H:%M %p')
 
 
-def filter_html(str):
-    lock = 0
-    str1 =""
-    for i in str:
-        if i == '<':
-            lock = 1
-        elif i == '>':
-            lock = 0
-        if lock == 0 and i != '>':
-            str1 += i
-    return str1
-
 
 def read_json(file_output_path):
     with open('json/' + file_output_path, 'r', encoding='utf-8') as f:
@@ -92,7 +80,7 @@ def insert_room():
         rooms = Accommodation(id=i['id'], member_id=i['member_id'], property_type_id=property_type,
                               room_type_id=room_type, bed_type_id=bed_type, name=i['name'],
                               address=i['address'], description=i['description'], special_notices=i['special_note'],
-                              price=i['price'], max_guess=i['maximum_guests'], num_bathrooms=i['num_bathrooms'],
+                              max_guess=i['maximum_guests'], num_bathrooms=i['num_bathrooms'],
                               num_bedrooms=i['num_bedrooms'], num_beds=i['num_beds'],
                               apartment_manual=i['apartment_manual'], apartment_rule=i['apartment_rules'],
                               status=i['status'], checkin_guide="")

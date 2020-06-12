@@ -243,9 +243,6 @@ class Accommodation(db.Model):
         if data.property_type != None:
             query = query.filter(PropertyType.name==data.property_type)
         
-        if data.price != None: 
-            query = query.filter(Accommodation.price==data.price)
-        
         if data.room_type != None: 
             query = query.filter(RoomType.name==data.room_type)
         

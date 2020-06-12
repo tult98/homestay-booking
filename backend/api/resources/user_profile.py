@@ -20,7 +20,7 @@ class UserProfileListAPI(Resource):
         """
         role = get_jwt_claims()['role']
         if role != 3:
-            return 
+            return {"message": "You don't have permission"}, 400
         else:
             return UserProfile.get_all_profile()
 

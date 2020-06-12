@@ -1,5 +1,6 @@
 from os.path import join, dirname
 from dotenv import load_dotenv
+import datetime
 
 import os
 
@@ -41,6 +42,7 @@ DATABSE_URI = 'mysql://{user}:{password}@{server}/{database}'.format(
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABSE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = secret_key
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(seconds=15*60)
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)

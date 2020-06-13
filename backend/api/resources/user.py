@@ -48,10 +48,16 @@ class UserRegisterAPI(Resource):
                 'message': "Your confirm password doesn't match"
             }, 400
         regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-        if (len(data['email']) and len(data['password1']) >=8) and (len(data['email']) and len(data['password1']) <=40): 
+        regex_pass = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,40}$'
+        if (len(data['email']) >=8) and (len(data['email']) <=40): 
             if not re.search(regex,data['email']):
                 return {
                     "message": "Invalid Email"
+                }, 400
+            
+            elif not re.search(regex_pass, data['password1']):
+                return {
+                    "message": "Password doesn't strong enough"
                 }, 400
             _id = uuid.uuid4().hex
             hash_password = bcrypt.generate_password_hash(data['password1']).decode('utf-8')
@@ -62,6 +68,10 @@ class UserRegisterAPI(Resource):
             return  {
                 'message': 'create account successfuly'.format(data['email'])
             }, 201
+        else:
+            return {
+                "message": "Email must have at least 8-40 characters"
+            }, 400
 
 
 @ns.route("/")

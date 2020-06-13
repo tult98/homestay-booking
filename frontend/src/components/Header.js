@@ -41,12 +41,14 @@ class Header extends Component {
         
         {currentUser ? (
           <div className="menu">
-            <div className="login">
+            <div className="user">
               {currentUser.user.email}
             </div>
-            <a href="/login" className="login" onClick={this.logOut}>
-              LogOut
-            </a>
+            <div className="menu">
+              <a href="/" className="signup" onClick={this.logOut}>
+                LogOut
+              </a>
+            </div>
           </div>
             ) : (
               <div className="menu">

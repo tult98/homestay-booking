@@ -7,9 +7,13 @@ import AuthService from "../services/auth.service";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Input from "react-validation/build/input";
+// import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { TextField } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import {Link} from 'react-router-dom';
+import { Input } from '@material-ui/core';
+import './login.css'
 
 
 const required = (value) => {
@@ -87,8 +91,13 @@ class Login extends Component {
       message: "",
       loading: true,
     });
+    this.onChangeEmail;
+    var email= document.getElementsByName('email');
+    email.validations({required, email});
+    
 
     this.form.validateAll();
+    
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.email, this.state.password).then(
@@ -139,6 +148,7 @@ class Login extends Component {
             }}
           >
             <TextField
+              
               variant="outlined"
               margin="normal"
               required
@@ -148,7 +158,7 @@ class Login extends Component {
               name="email"
               autoComplete="email"
               autoFocus
-              type="text"
+              type="email"
               className="form-control"
               value={this.state.email}
               onChange={this.onChangeEmail}
@@ -156,6 +166,7 @@ class Login extends Component {
             />
 
             <TextField
+              
               variant="outlined"
               margin="normal"
               required
@@ -185,6 +196,17 @@ class Login extends Component {
               <span>Đăng nhập</span>
             </Button>
 
+            <Grid container justify="flex-end">
+              <Grid item>
+                {/* <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link> */}
+                <Link variant="body2" to={"/register"}>
+                  Bạn chưa có tài khoản? Đăng kí ngay
+                </Link>
+              </Grid>
+            </Grid>
+            
             {this.state.message && (
               <div className="form-group">
                 <div className="alert alert-danger" role="alert">
@@ -192,6 +214,7 @@ class Login extends Component {
                 </div>
               </div>
             )}
+           
             <CheckButton
               style={{ display: "none" }}
               ref={(c) => {

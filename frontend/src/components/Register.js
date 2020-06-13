@@ -171,6 +171,7 @@ class Register extends Component {
             successful: true
           });
           if (response.status === 201) {
+            alert('Bạn đã đăng ký thành công!')
             this.props.history.push("/login");
             window.location.reload();
           }
@@ -213,7 +214,11 @@ class Register extends Component {
             }}
           >
             <Grid container spacing={2}>
+
+           
               <Grid item xs={12} sm={6}>
+
+
                 <TextField
                   autoComplete="email"
                   name="email"
@@ -264,7 +269,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                 <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -279,7 +284,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+               <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -295,7 +300,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+               <TextField
                   variant="outlined"
                   required
                   fullWidth

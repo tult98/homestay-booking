@@ -59,7 +59,7 @@ class Rooms extends Component {
   }
   componentDidMount() {
     axios
-      .get("http://192.168.1.209:5000/api/accommodation/?size=30&page=1")
+      .get("http://192.168.199.31:5000/api/accommodation/?size=30&page=1")
       .then((res) => {
         this.setState({
           posts: res.data.data,
@@ -71,7 +71,7 @@ class Rooms extends Component {
   }
   getNewPage = (numPage) => {
     axios
-      .get("http://192.168.1.209:5000/api/accommodation/?size=30&page=" + numPage)
+      .get("http://192.168.199.31:5000/api/accommodation/?size=30&page=" + numPage)
       .then((res) => {
         this.setState({
           posts: res.data.data,

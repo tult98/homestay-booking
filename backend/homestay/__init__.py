@@ -35,7 +35,7 @@ database_name = os.getenv('DATABASE_NAME')
 secret_key = os.getenv('SECRET_KEY')
 
 DATABSE_URI = 'mysql://{user}:{password}@{server}/{database}'.format(
-    user=username, password=password, server='192.168.1.209', database=database_name)
+    user=username, password=password, server='192.168.199.31', database=database_name)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABSE_URI

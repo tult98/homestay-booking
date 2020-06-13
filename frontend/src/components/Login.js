@@ -91,6 +91,7 @@ class Login extends Component {
       AuthService.login(this.state.email, this.state.password).then(
         (res) => {
           if (res.jwt) {
+
             localStorage.setItem('loginstate',true);
             this.props.history.push("/");
             window.location.reload();
@@ -103,6 +104,7 @@ class Login extends Component {
               error.response.data.message) ||
             error.message ||
             error.toString();
+            
 
           this.setState({
             loading: false,
@@ -140,7 +142,8 @@ class Login extends Component {
               this.form = c;
             }}
           >
-            <TextField
+           <TextField
+              autoFocus
               variant="outlined"
               margin="normal"
               required

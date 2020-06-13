@@ -24,7 +24,8 @@ class Header extends Component {
 
         { localStorage.getItem('loginstate') ?
         <div className="menu">
-          <Link className="logout" onClick={ () =>  localStorage.clear()} to={"/"}>
+          <Link className="logout" onClick={ () => { localStorage.clear();
+          window.location.reload();}} to={"/"}>
            Đăng xuất
           </Link>       
         </div>

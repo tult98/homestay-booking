@@ -44,7 +44,7 @@ class RoomDetail extends Component {
 
   componentDidMount() {
     axios
-      .get("http://192.168.1.209:5000/api/accommodation/" + this.state.roomId)
+      .get("http://192.168.199.31:5000/api/accommodation/" + this.state.roomId)
       .then((response) => {
         this.setState({
           room: response.data,

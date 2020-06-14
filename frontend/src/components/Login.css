@@ -1,0 +1,63 @@
+.loginForm {
+    display: grid;
+}
+.form {
+    left: 50%;
+    top: 50%;
+    margin-left: -25%;
+    position: absolute;
+    margin-top: -25%;
+    width: 500px;
+    height: 300px;
+    padding-top: 100px;
+}
+
+.txtEmailControl {
+    width: 100%;
+    height: 30px;
+    padding-top: 30px;
+    margin-top: 20px;
+    font-size: 25px;
+    text-align: left;
+}
+
+.buttonSubmit {
+    margin-left: 40%;
+    margin-top: 30px;
+    border: 1px solid #f59595;
+    color: #222;
+    background-color: #fff;
+    /* position: relative; */
+    transition: all .3s;
+    text-align: center;
+    cursor: pointer;
+    font: 400 13.3333px Arial;
+    align-items: flex-start;
+    text-rendering: auto;
+    padding: .5em .8em;
+    font-size: .875rem;
+    font-weight: 600;
+    /* margin-right: .75rem; */
+    border-radius: 5px;
+    height: 50px;
+    width: 100px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-appearance: button;
+    display: block;
+    right: 0px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.titleLogin {
+    margin-left: 40%;
+    /* margin-top: 10px; */
+}
+.imageLogin {
+    margin-left: 45%;
+    /* margin-top: 10px; */
+}
+
+.alert {
+    color: red;
+}

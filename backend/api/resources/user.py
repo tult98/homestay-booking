@@ -49,6 +49,7 @@ class UserRegisterAPI(Resource):
             }, 400
         regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
         regex_pass = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,40}$'
+
         if (len(data['email']) >=8) and (len(data['email']) <=40): 
             if not re.search(regex,data['email']):
                 return {

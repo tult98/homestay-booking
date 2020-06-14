@@ -179,11 +179,32 @@ class Register extends Component {
     let password = document.getElementById('password1');
     let password1_confirm = document.getElementById('password2');
     let phone_number = document.getElementById('phoneNumber');
+    let first_name = document.getElementById('firstName');
+    let last_name = document.getElementById('lastName');
 
     if(!validateEmail(this.state.email)){
       alert('Your email address is invalid.');
       email.focus();
       return false;
+    }
+
+    if(!(this.state.first_name)){
+      alert('You have not entered the first name');
+      first_name.focus();
+      return false;
+    }
+
+    if(!(this.state.last_name)){
+      alert('You have not entered the last name');
+      last_name.focus();
+      return false;
+    }
+
+    if(!validatePhone(this.state.phone_number)){
+      alert('Phone number should be 10 or 11 digit number.')
+      phone_number.focus();
+      return false;
+
     }
 
     if (!validatePassword(this.state.password1)){
@@ -199,12 +220,6 @@ class Register extends Component {
 
     }
 
-    if(!validatePhone(this.state.phone_number)){
-      alert('Phone number should be 10 or 11 digit number.')
-      phone_number.focus();
-      return false;
-
-    }
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(

@@ -4,6 +4,7 @@ import "./Header.css";
 // import for routing
 import { Link } from "react-router-dom";
 import authService from "../services/auth.service";
+import user from '../resource/user.png';
 
 class Header extends Component {
   state = {
@@ -17,7 +18,7 @@ class Header extends Component {
       this.setState({
         currentUser: user
       });
-      console.log(user)
+      console.log(user) 
     }
   }
 
@@ -42,11 +43,12 @@ class Header extends Component {
         {currentUser ? (
           <div className="menu">
             <div className="user">
+            <img id="image" src={user}/>
               {currentUser.user.email}
             </div>
             <div className="menu">
               <a href="/" className="signup" onClick={this.logOut}>
-                LogOut
+                Log out
               </a>
             </div>
           </div>

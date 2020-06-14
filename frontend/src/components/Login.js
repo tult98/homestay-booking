@@ -91,10 +91,8 @@ class Login extends Component {
       message: "",
       loading: true,
     });
-    this.onChangeEmail;
-    var email= document.getElementsByName('email');
-    email.validations({required, email});
     
+  
 
     this.form.validateAll();
     

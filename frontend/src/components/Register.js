@@ -88,6 +88,22 @@ const useStyles = (theme) => ({
   },
 });
 
+
+function validateEmail(email){
+    let re = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    return re.test(email);
+  };
+
+function validatePassword(password){
+    let re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,40}$/;
+    return re.test(password);
+  };
+
+function validatePhone(phone){
+  let re = /^\d{10,11}$/;
+  return re.test(phone);
+}
+
 class Register extends Component {
 
   constructor(props) {
@@ -148,6 +164,8 @@ class Register extends Component {
     });
   }
 
+  
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -157,6 +175,36 @@ class Register extends Component {
     });
 
     this.form.validateAll();
+    let email = document.getElementById('email');
+    let password = document.getElementById('password1');
+    let password1_confirm = document.getElementById('password2');
+    let phone_number = document.getElementById('phoneNumber');
+
+    if(!validateEmail(this.state.email)){
+      alert('Your email address is invalid.');
+      email.focus();
+      return false;
+    }
+
+    if (!validatePassword(this.state.password1)){
+      alert('Password between 8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.')
+      password.focus();
+      return false;
+
+    }
+    if((this.state.password1)!=(this.state.password2)){
+      alert('Confirm password does not match');
+      password1_confirm.focus();
+      return false;
+
+    }
+
+    if(!validatePhone(this.state.phone_number)){
+      alert('Phone number should be 10 or 11 digit number.')
+      phone_number.focus();
+      return false;
+
+    }
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(
@@ -173,6 +221,7 @@ class Register extends Component {
             successful: true
           });
           if (response.status === 201) {
+            alert(response.data.message);
             this.props.history.push("/login");
             window.location.reload();
           }
@@ -231,6 +280,7 @@ class Register extends Component {
                   onChange={this.onChangeEmail}
                   validations={[required, email]}
                 />
+
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -288,7 +338,7 @@ class Register extends Component {
                   name="password"
                   label="Password"
                   type="password"
-                  id="password"
+                  id="password1"
                   autoComplete="current-password"
                   className="form-control"
                   value={this.state.password1}
@@ -304,7 +354,7 @@ class Register extends Component {
                   name="password"
                   label="Password"
                   type="password"
-                  id="password"
+                  id="password2"
                   autoComplete="current-password"
                   className="form-control"
                   value={this.state.password2}

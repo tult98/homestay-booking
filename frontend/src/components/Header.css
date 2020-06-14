@@ -1,3 +1,11 @@
+
+#image {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    margin-right: 10px;
+}
+
 .header {
     border-bottom: 1px solid #e9dfdf;
     display: flex;

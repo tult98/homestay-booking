@@ -29,17 +29,15 @@ jwt = JWTManager(app)
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
-username = os.getenv('USERNAME')
-password = os.getenv('PASSWORD')
-server = os.getenv('SERVER')
-database_name = os.getenv('DATABASE_NAME')
-secret_key = os.getenv('SECRET_KEY')
-
-DATABSE_URI = 'mysql://{user}:{password}@{server}/{database}'.format(
-    user=username, password=password, server='127.0.0.1', database=database_name)
+# username = os.getenv('USERNAME')
+# password = os.getenv('PASSWORD')
+# server = os.getenv('SERVER')
+# database_name = os.getenv('DATABASE_NAME')
+secret_key = 'SECRET_KEY'
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABSE_URI
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = secret_key
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(seconds=15*60)

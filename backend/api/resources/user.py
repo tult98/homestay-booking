@@ -57,7 +57,7 @@ class UserRegisterAPI(Resource):
             
             elif not re.search(regex_pass, data['password1']):
                 return {
-                    "message": "Password doesn't strong enough"
+                    "message": "Password must contain at least 1 uppercase, letter and 1 special character"
                 }, 400
             _id = uuid.uuid4().hex
             hash_password = bcrypt.generate_password_hash(data['password1']).decode('utf-8')
@@ -66,7 +66,7 @@ class UserRegisterAPI(Resource):
             user.save_to_db()
             user_proflie.save_to_db()
             return  {
-                'message': 'create account successfuly'.format(data['email'])
+                'message': 'Create account successfuly'.format(data['email'])
             }, 201
         else:
             return {

@@ -13,7 +13,7 @@ import { TextField } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import {Link} from 'react-router-dom';
 import { Input } from '@material-ui/core';
-import './login.css'
+import './Login.css'
 
 
 const required = (value) => {
@@ -145,7 +145,7 @@ class Login extends Component {
               this.form = c;
             }}
           >
-            <TextField
+            <input
               
               variant="outlined"
               margin="normal"
@@ -163,8 +163,7 @@ class Login extends Component {
               validations={[required, email]}
             />
 
-            <TextField
-              
+            <input
               variant="outlined"
               margin="normal"
               required

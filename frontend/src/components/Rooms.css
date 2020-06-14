@@ -90,10 +90,17 @@ h3 {
   right: 0px;
   padding: 10px;
   text-decoration: none;
+
 }
 
 .chckBoxFilter {
-  padding-bottom: 50px;
+  display: flex;
+  -webkit-appearance: button;
+  width: auto;
+  height: 25px;
+  margin-top: 20px;
+  text-align: center;
+  margin-left: 10px;
 }
 
 .blockBtnFilter {
@@ -101,6 +108,10 @@ h3 {
   display: flex;
 }
 
-.inputNumBedRoom {
-  
+.blockButtonFilter {
+  display: flex;
+  text-align: center;
+}
+.filterButtonGroup {
+  display: flex;
 }

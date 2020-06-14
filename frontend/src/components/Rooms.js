@@ -11,7 +11,6 @@ import Container from "@material-ui/core/Container";
 import "./Rooms.css";
 import Pagination from "@material-ui/lab/Pagination";
 import { Link } from "react-router-dom";
-import Checkbox from "./CheckBox";
 
 const itemsTypeRoom = ["Nguyên căn", "Phòng riêng", "Ở ghép"];
 

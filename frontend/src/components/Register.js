@@ -266,14 +266,9 @@ class Register extends Component {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <input
-                  autoComplete="email"
                   name="email"
-                  variant="outlined"
-                  required
-                  fullWidth
                   id="email"
                   label="Email Address"
-                  autoFocus
                   type='text'
                   className="form-control"
                   value={this.state.email}
@@ -286,9 +281,6 @@ class Register extends Component {
                 <input
                   autoComplete="fname"
                   name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus

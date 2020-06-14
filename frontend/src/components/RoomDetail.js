@@ -42,15 +42,21 @@ class RoomDetail extends Component {
     room: {},
     roomId: this.props.match.params.roomId,
     images: [],
+    bedType: "",
+    roomType: "",
+    propertyType: "",
   };
 
   componentDidMount() {
     axios
-      .get("http://192.168.1.209:5000/api/accommodation/" + this.state.roomId)
+      .get("http://127.0.0.1:5000/api/accommodation/" + this.state.roomId)
       .then((response) => {
         this.setState({
           room: response.data,
           images: response.data.images,
+          bedType: response.data.bed_type.name,
+          roomType: response.data.room_type.name,
+          propertyType: response.data.property_type.name,
         });
       })
       .catch((error) => {
@@ -60,7 +66,7 @@ class RoomDetail extends Component {
 
   render() {
     const { classes } = this.props;
-    const { room, images } = this.state;
+    const { room, images, bedType, roomType, propertyType } = this.state;
     console.log(room);
     const imageArr = images.map((image) => image.image_url);
     return (
@@ -107,9 +113,9 @@ class RoomDetail extends Component {
                 <div dangerouslySetInnerHTML={{__html: room.description}}
                 />
                 <h3>Tiện nghi chỗ ở</h3>
-                <h4>Loại giường:</h4>
-                <h4>Tien ich bep</h4>
-                <h3>Đánh giá</h3>
+                <h4>Loại giường: {bedType}</h4>
+                <h4>Loại homestay: {propertyType}</h4>
+                <h4>Loại phòng: {roomType}</h4>
               </Grid>
               <div className="sidebar"></div>
               <Grid item xs={12} md={4}>

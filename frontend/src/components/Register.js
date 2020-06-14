@@ -213,7 +213,7 @@ class Register extends Component {
       return false;
 
     }
-    if((this.state.password1)!=(this.state.password2)){
+    if((this.state.password1)!==(this.state.password2)){
       alert('Confirm password does not match');
       password1_confirm.focus();
       return false;
@@ -280,10 +280,15 @@ class Register extends Component {
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <input
+                <TextField
+                  autoComplete="email"
                   name="email"
+                  variant="outlined"
+                  required
+                  fullWidth
                   id="email"
                   label="Email Address"
+                  autoFocus
                   type='text'
                   className="form-control"
                   value={this.state.email}
@@ -293,9 +298,12 @@ class Register extends Component {
 
               </Grid>
               <Grid item xs={12} sm={6}>
-                <input
+                <TextField
                   autoComplete="fname"
                   name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
@@ -307,7 +315,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -323,7 +331,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -338,7 +346,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -354,7 +362,7 @@ class Register extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <input
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
